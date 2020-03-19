@@ -3,85 +3,65 @@ package com.example.tfgluismi
 import Data.AdminBD
 import Data.AppTFGLuismi
 import android.app.AlertDialog
-import android.app.Application
-import android.app.Dialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_mostrar_arch_con.*
 
-
-class MainActivity : AppCompatActivity() {
+class MostrarArchCon : AppCompatActivity() {
 
     val BdAdmin = AdminBD()
     lateinit var textos: ArrayList<String>
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        eliminarTarea()
-        //TODO detallesTarea()
-
-        buttonMostrarAC.setOnClickListener{
-            val intent = Intent(this,MostrarArchCon::class.java)
-            startActivity(intent)
-        }
-
-        buttonMostrarP.setOnClickListener{
-            val intent = Intent(this,MostrarProyectos::class.java)
-            startActivity(intent)
-        }
-
-        buttonMostrarAP.setOnClickListener{
-            val intent = Intent(this,MostrarArchProy::class.java)
-            startActivity(intent)
-        }
+        setContentView(R.layout.activity_mostrar_arch_con)
+        eliminarArchCon()
     }
 
     override fun onStart() {
         super.onStart()
-        crearTareas()
+        crearArchCon()
     }
 
     override fun onResume() {
         super.onResume()
     }
 
-//-------------------------------------------------------CREATES-----------------------------------------------------------------------------
+    //-------------------------------------------------------CREATES-----------------------------------------------------------------------------
 
-    fun crearTareas(){
-        textos = BdAdmin.getTareas()!!
+    fun crearArchCon(){
+        textos = BdAdmin.getArchCon()!!
         val adaptador = ArrayAdapter(applicationContext,android.R.layout.simple_list_item_1,textos!!)
-        ListTareas.adapter = adaptador
+        ListArchCon.adapter = adaptador
 
         //Al seleccionar un elemento de la lista
-        ListTareas.onItemClickListener = AdapterView.OnItemClickListener{adapterView, view, i, l ->
+        ListArchCon.onItemClickListener = AdapterView.OnItemClickListener{ adapterView, view, i, l ->
             val item = textos!!.get(i)
             Toast.makeText(AppTFGLuismi.CONTEXT, item, Toast.LENGTH_SHORT).show()
         }
- }
+    }
 
 //----------------------------------------------------------DELETES-------------------------------------------------------------------
 
-    fun eliminarTarea(){
-        ListTareas.onItemLongClickListener = AdapterView.OnItemLongClickListener { adapterView, view, i, l ->
+    fun eliminarArchCon(){
+        ListArchCon.onItemLongClickListener = AdapterView.OnItemLongClickListener { adapterView, view, i, l ->
 
             val texto = textos.get(i)
 
             val dialog = AlertDialog.Builder(this)
             dialog.setTitle("Confirmación")
-            dialog.setMessage("¿Quieres borrar la tarea?")
+            dialog.setMessage("¿Quieres borrar el archivo de consulta?")
             dialog.setPositiveButton("Si"){dialogInterface, i ->
-                BdAdmin.removeTarea(texto)
-                crearTareas()
+                BdAdmin.removeArchCon(texto)
+                crearArchCon()
             }
             dialog.setNegativeButton("No"){dialogInterface, i ->
                 dialogInterface.dismiss()
@@ -93,15 +73,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflate = menuInflater
-        inflate.inflate(R.menu.menu_tareas,menu)
+        inflate.inflate(R.menu.menu_arch_con,menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item!!.itemId){
-            R.id.action_add -> {
-                val intentAddTarea = Intent(applicationContext,AgregarTarea::class.java)
-                startActivity(intentAddTarea)
+            R.id.action_add_AC -> {
+                val intentAddArchCon = Intent(applicationContext,AgregarArchCon::class.java)
+                startActivity(intentAddArchCon)
                 return true
             }
             else -> return super.onOptionsItemSelected(item)
