@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeMenuDrawer"
+        android:icon="@drawable/ic_home"
+        android:title="Home">
+
+    </item>
+    <item
+        android:id="@+id/clasificarTareasMenuDrawer"
+        android:icon="@drawable/ic_clasificar"
+        android:title="Clasificar Tareas">
+
+    </item>
+
+    <item android:title="Listas de Tareas">
+        <menu>
+                <item
+                    android:id="@+id/calendarioMenuDrawer"
+                    android:icon="@drawable/ic_calendar"
+                    android:title="Calendario">
+
+                </item>
+                <item
+                    android:id="@+id/siguienteMenuDrawer"
+                    android:icon="@drawable/ic_next"
+                    android:title="Siguientes">
+
+                </item>
+                <item
+                    android:id="@+id/delegadasMenuDrawer"
+                    android:icon="@drawable/ic_delegado"
+                    android:title="Delegadas">
+
+                </item>
+                <item
+                    android:id="@+id/algunDiaMenuDrawer"
+                    android:icon="@drawable/ic_flag"
+                    android:title="Algun dia">
+
+                </item>
+                <item
+                    android:id="@+id/proyectosMenuDrawer"
+                    android:icon="@drawable/ic_phonelink"
+                    android:title="Proyectos">
+
+                </item>
+        </menu>
+
+    </item>
+
+
+    <item android:title="Archivos">
+        <menu>
+            <item
+                android:id="@+id/archConMenuDrawer"
+                android:icon="@drawable/ic_file"
+                android:title="Archivos de Consulta">
+
+            </item>
+        </menu>
+    </item>
+</menu>
