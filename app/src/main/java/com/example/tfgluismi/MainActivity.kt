@@ -8,105 +8,111 @@ import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Adapter
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import com.example.tfgluismi.Fragments.*
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    val BdAdmin = AdminBD()
-    lateinit var textos: ArrayList<String>
+    lateinit var drawerLayout: DrawerLayout
+    lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
+    lateinit var toolbar: Toolbar
+    lateinit var navigationView: NavigationView
 
+    //Variables para cargar el fragment principal
+    lateinit var fragmentManager: FragmentManager
+    lateinit var fragmentTransaction: FragmentTransaction
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        eliminarTarea()
-        //TODO detallesTarea()
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        drawerLayout = findViewById(R.id.drawer)
+        navigationView = findViewById(R.id.navigationView)
+        //establecer el evento onClick al navigationView
+        navigationView.setNavigationItemSelectedListener(this)
 
-        buttonMostrarAC.setOnClickListener{
-            val intent = Intent(this,MostrarArchCon::class.java)
-            startActivity(intent)
-        }
+        actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar,R.string.open,R.string.close)
+        drawerLayout.addDrawerListener(actionBarDrawerToggle)
+        actionBarDrawerToggle.isDrawerIndicatorEnabled()
+        actionBarDrawerToggle.syncState()
 
-        buttonMostrarP.setOnClickListener{
-            val intent = Intent(this,MostrarProyectos::class.java)
-            startActivity(intent)
-        }
-
-        buttonMostrarAP.setOnClickListener{
-            val intent = Intent(this,MostrarArchProy::class.java)
-            startActivity(intent)
-        }
+        //cargar fragment principal
+        fragmentManager = supportFragmentManager
+        fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.add(R.id.container, MainFragment())
+        fragmentTransaction.commit()
     }
 
-    override fun onStart() {
-        super.onStart()
-        crearTareas()
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-//-------------------------------------------------------CREATES-----------------------------------------------------------------------------
-
-    fun crearTareas(){
-        textos = BdAdmin.getTareas()!!
-        val adaptador = ArrayAdapter(applicationContext,android.R.layout.simple_list_item_1,textos!!)
-        ListTareas.adapter = adaptador
-
-        //Al seleccionar un elemento de la lista
-        ListTareas.onItemClickListener = AdapterView.OnItemClickListener{adapterView, view, i, l ->
-            val item = textos!!.get(i)
-            Toast.makeText(AppTFGLuismi.CONTEXT, item, Toast.LENGTH_SHORT).show()
-        }
- }
-
-//----------------------------------------------------------DELETES-------------------------------------------------------------------
-
-    fun eliminarTarea(){
-        ListTareas.onItemLongClickListener = AdapterView.OnItemLongClickListener { adapterView, view, i, l ->
-
-            val texto = textos.get(i)
-
-            val dialog = AlertDialog.Builder(this)
-            dialog.setTitle("Confirmación")
-            dialog.setMessage("¿Quieres borrar la tarea?")
-            dialog.setPositiveButton("Si"){dialogInterface, i ->
-                BdAdmin.removeTarea(texto)
-                crearTareas()
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        drawerLayout.closeDrawer(GravityCompat.START)
+        when (item.itemId){
+            R.id.homeMenuDrawer -> {
+                fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.container, MainFragment())
+                fragmentTransaction.commit()
+                toolbar.setTitle("OrganIce - Principal")
             }
-            dialog.setNegativeButton("No"){dialogInterface, i ->
-                dialogInterface.dismiss()
+            R.id.clasificarTareasMenuDrawer -> {
+                fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.container, ClasificarTareasFragment())
+                fragmentTransaction.commit()
+                toolbar.setTitle("OrganIce - Clasificar")
             }
-            dialog.show()
-            true
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflate = menuInflater
-        inflate.inflate(R.menu.menu_tareas,menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item!!.itemId){
-            R.id.action_add -> {
-                val intentAddTarea = Intent(applicationContext,AgregarTarea::class.java)
-                startActivity(intentAddTarea)
-                return true
+            R.id.calendarioMenuDrawer -> {
+                fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.container, CalendarioFragment())
+                fragmentTransaction.commit()
+                toolbar.setTitle("OrganIce - Calendario")
             }
-            else -> return super.onOptionsItemSelected(item)
+            R.id.siguienteMenuDrawer -> {
+                fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.container, SiguientesFragment())
+                fragmentTransaction.commit()
+                toolbar.setTitle("OrganIce - Siguientes")
+            }
+            R.id.delegadasMenuDrawer -> {
+                fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.container, DelegadasFragment())
+                fragmentTransaction.commit()
+                toolbar.setTitle("OrganIce - Delegadas")
+            }
+            R.id.algunDiaMenuDrawer -> {
+                fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.container, AlgunDiaFragment())
+                fragmentTransaction.commit()
+                toolbar.setTitle("OrganIce - Algun dia")
+            }
+            R.id.proyectosMenuDrawer -> {
+                fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.container, ProyectosFragment())
+                fragmentTransaction.commit()
+                toolbar.setTitle("OrganIce - Proyectos")
+            }
+            R.id.archConMenuDrawer -> {
+                fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.container, MostrarArchConFragment())
+                fragmentTransaction.commit()
+                toolbar.setTitle("OrganIce - Arch. consulta genreal")
+            }
         }
+        return false
     }
-
 
 }

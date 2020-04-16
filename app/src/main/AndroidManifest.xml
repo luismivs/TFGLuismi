@@ -10,10 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AgregarTarea"
-            android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".MainActivity"
-            android:theme="@style/SplashTheme">
+        <activity android:name=".MainActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -28,6 +25,9 @@
         <activity android:name=".AgregarArchProy"
             android:parentActivityName=".MostrarArchProy"></activity>
         <activity android:name=".MostrarArchProy"></activity>
+        <activity android:name=".AgregarTarea"
+            android:parentActivityName=".MostrarTareas"></activity>
+        <activity android:name=".MostrarTareas"></activity>
     </application>
 
 </manifest>
