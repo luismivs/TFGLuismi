@@ -18,13 +18,13 @@
                 <item
                     android:id="@+id/calendarioMenuDrawer"
                     android:icon="@drawable/ic_calendar"
-                    android:title="Calendario">
+                    android:title="Programadas">
 
                 </item>
                 <item
                     android:id="@+id/siguienteMenuDrawer"
                     android:icon="@drawable/ic_next"
-                    android:title="Siguientes">
+                    android:title="Cuando puedas">
 
                 </item>
                 <item
@@ -39,14 +39,25 @@
                     android:title="Algun dia">
 
                 </item>
-                <item
-                    android:id="@+id/proyectosMenuDrawer"
-                    android:icon="@drawable/ic_phonelink"
-                    android:title="Proyectos">
-
-                </item>
         </menu>
 
+    </item>
+
+    <item android:title="Proyectos">
+        <menu>
+            <item
+                android:id="@+id/proyectosMenuDrawer"
+                android:icon="@drawable/ic_phonelink"
+                android:title="Proyectos">
+
+            </item>
+            <item
+                android:id="@+id/archProyMenuDrawer"
+                android:icon="@drawable/ic_file"
+                android:title="Archivos de proyectos">
+
+            </item>
+        </menu>
     </item>
 
 

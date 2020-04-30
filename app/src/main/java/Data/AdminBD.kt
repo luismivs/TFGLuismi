@@ -17,9 +17,6 @@ class AdminBD {
     fun getTareas():ArrayList<String>?{
         try {
             val textos = arrayListOf<String>()
-            val fechas = arrayListOf<String>()
-            val horas = arrayListOf<String>()
-            val usuariosDelegados = arrayListOf<String>()
             val db = AppTFGLuismi.DB.readableDatabase
             //Comprobamos si hay tareas guardadas
             val numTareas = DatabaseUtils.queryNumEntries(db,AppTFGLuismi.TB_TAREAS).toInt()
@@ -30,15 +27,162 @@ class AdminBD {
                 c.moveToFirst()
                 do{
                     textos.add(c.getString(c.getColumnIndex(Contract.Tarea.TEXTO)))
-                    //fechas.add(c.getString(c.getColumnIndex(Contract.Tarea.FECHA)))
-                    //horas.add(c.getString(c.getColumnIndex(Contract.Tarea.HORA)))
-                    //usuariosDelegados.add(c.getString(c.getColumnIndex(Contract.Tarea.USUARIO_DELEGADO)))
                 }while (c.moveToNext())
             }else{
                 makeText(AppTFGLuismi.CONTEXT,"No hay tareas guardadas", Toast.LENGTH_SHORT).show()
             }
             db.close()
-            return textos//; fechas; horas; usuariosDelegados
+            return textos
+        }catch (ex:Exception){
+            makeText(AppTFGLuismi.CONTEXT,"No se pudieron mostrar las tareas", Toast.LENGTH_SHORT).show()
+            return null
+        }
+    }
+
+    fun getTareasId():ArrayList<Int>?{
+        try {
+            val ids = arrayListOf<Int>()
+            val db = AppTFGLuismi.DB.readableDatabase
+            //Comprobamos si hay tareas guardadas
+            val numTareas = DatabaseUtils.queryNumEntries(db,AppTFGLuismi.TB_TAREAS).toInt()
+            if (numTareas > 0){
+                val qry = "SELECT ${Contract.Tarea.tareaID} FROM ${AppTFGLuismi.TB_TAREAS}"
+                val c = db.rawQuery(qry,null)
+                //vamos al inicio de la tabla
+                c.moveToFirst()
+                do{
+                    ids.add(c.getInt(c.getColumnIndex(Contract.Tarea.tareaID)))
+                }while (c.moveToNext())
+            }else{
+                makeText(AppTFGLuismi.CONTEXT,"No hay tareas guardadas", Toast.LENGTH_SHORT).show()
+            }
+            db.close()
+            return ids
+        }catch (ex:Exception){
+            makeText(AppTFGLuismi.CONTEXT,"No se pudieron mostrar las tareas", Toast.LENGTH_SHORT).show()
+            return null
+        }
+    }
+
+    fun getTareasFecha():ArrayList<String>?{
+        try {
+            val fechas = arrayListOf<String>()
+            val db = AppTFGLuismi.DB.readableDatabase
+            //Comprobamos si hay tareas guardadas
+            val numTareas = DatabaseUtils.queryNumEntries(db,AppTFGLuismi.TB_TAREAS).toInt()
+            if (numTareas > 0){
+                val qry = "SELECT ${Contract.Tarea.FECHA} FROM ${AppTFGLuismi.TB_TAREAS}"
+                val c = db.rawQuery(qry,null)
+                //vamos al inicio de la tabla
+                c.moveToFirst()
+                do{
+                    fechas.add(c.getString(c.getColumnIndex(Contract.Tarea.FECHA)))
+                }while (c.moveToNext())
+            }else{
+                makeText(AppTFGLuismi.CONTEXT,"No hay tareas guardadas", Toast.LENGTH_SHORT).show()
+            }
+            db.close()
+            return fechas
+        }catch (ex:Exception){
+            makeText(AppTFGLuismi.CONTEXT,"No se pudieron mostrar las tareas", Toast.LENGTH_SHORT).show()
+            return null
+        }
+    }
+
+    fun getTareasHora():ArrayList<String>?{
+        try {
+            val horas = arrayListOf<String>()
+            val db = AppTFGLuismi.DB.readableDatabase
+            //Comprobamos si hay tareas guardadas
+            val numTareas = DatabaseUtils.queryNumEntries(db,AppTFGLuismi.TB_TAREAS).toInt()
+            if (numTareas > 0){
+                val qry = "SELECT ${Contract.Tarea.HORA} FROM ${AppTFGLuismi.TB_TAREAS}"
+                val c = db.rawQuery(qry,null)
+                //vamos al inicio de la tabla
+                c.moveToFirst()
+                do{
+                    horas.add(c.getString(c.getColumnIndex(Contract.Tarea.HORA)))
+                }while (c.moveToNext())
+            }else{
+                makeText(AppTFGLuismi.CONTEXT,"No hay tareas guardadas", Toast.LENGTH_SHORT).show()
+            }
+            db.close()
+            return horas
+        }catch (ex:Exception){
+            makeText(AppTFGLuismi.CONTEXT,"No se pudieron mostrar las tareas", Toast.LENGTH_SHORT).show()
+            return null
+        }
+    }
+
+    fun getTareasUsuarioDelegado():ArrayList<String>?{
+        try {
+            val usuarios = arrayListOf<String>()
+            val db = AppTFGLuismi.DB.readableDatabase
+            //Comprobamos si hay tareas guardadas
+            val numTareas = DatabaseUtils.queryNumEntries(db,AppTFGLuismi.TB_TAREAS).toInt()
+            if (numTareas > 0){
+                val qry = "SELECT ${Contract.Tarea.USUARIO_DELEGADO} FROM ${AppTFGLuismi.TB_TAREAS}"
+                val c = db.rawQuery(qry,null)
+                //vamos al inicio de la tabla
+                c.moveToFirst()
+                do{
+                    usuarios.add(c.getString(c.getColumnIndex(Contract.Tarea.USUARIO_DELEGADO)))
+                }while (c.moveToNext())
+            }else{
+                makeText(AppTFGLuismi.CONTEXT,"No hay tareas guardadas", Toast.LENGTH_SHORT).show()
+            }
+            db.close()
+            return usuarios
+        }catch (ex:Exception){
+            makeText(AppTFGLuismi.CONTEXT,"No se pudieron mostrar las tareas", Toast.LENGTH_SHORT).show()
+            return null
+        }
+    }
+
+    fun getTareasTipoLista():ArrayList<String>?{
+        try {
+            val listas = arrayListOf<String>()
+            val db = AppTFGLuismi.DB.readableDatabase
+            //Comprobamos si hay tareas guardadas
+            val numTareas = DatabaseUtils.queryNumEntries(db,AppTFGLuismi.TB_TAREAS).toInt()
+            if (numTareas > 0){
+                val qry = "SELECT ${Contract.Tarea.TIPO_LISTA} FROM ${AppTFGLuismi.TB_TAREAS}"
+                val c = db.rawQuery(qry,null)
+                //vamos al inicio de la tabla
+                c.moveToFirst()
+                do{
+                    listas.add(c.getString(c.getColumnIndex(Contract.Tarea.TIPO_LISTA)))
+                }while (c.moveToNext())
+            }else{
+                makeText(AppTFGLuismi.CONTEXT,"No hay tareas guardadas", Toast.LENGTH_SHORT).show()
+            }
+            db.close()
+            return listas
+        }catch (ex:Exception){
+            makeText(AppTFGLuismi.CONTEXT,"No se pudieron mostrar las tareas", Toast.LENGTH_SHORT).show()
+            return null
+        }
+    }
+
+    fun getTareasProyecto():ArrayList<String>?{
+        try {
+            val proyectos = arrayListOf<String>()
+            val db = AppTFGLuismi.DB.readableDatabase
+            //Comprobamos si hay tareas guardadas
+            val numTareas = DatabaseUtils.queryNumEntries(db,AppTFGLuismi.TB_TAREAS).toInt()
+            if (numTareas > 0){
+                val qry = "SELECT ${Contract.Tarea.PROYECTO} FROM ${AppTFGLuismi.TB_TAREAS}"
+                val c = db.rawQuery(qry,null)
+                //vamos al inicio de la tabla
+                c.moveToFirst()
+                do{
+                    proyectos.add(c.getString(c.getColumnIndex(Contract.Tarea.PROYECTO)))
+                }while (c.moveToNext())
+            }else{
+                makeText(AppTFGLuismi.CONTEXT,"No hay tareas guardadas", Toast.LENGTH_SHORT).show()
+            }
+            db.close()
+            return proyectos
         }catch (ex:Exception){
             makeText(AppTFGLuismi.CONTEXT,"No se pudieron mostrar las tareas", Toast.LENGTH_SHORT).show()
             return null
@@ -69,6 +213,64 @@ class AdminBD {
             return null
         }
     }
+
+    fun getArchConId():ArrayList<Int>?{
+        try {
+            val ids = arrayListOf<Int>()
+            val db = AppTFGLuismi.DB.readableDatabase
+            //Comprobamos si hay Archivos de consulta guardados
+            val numArchCon = DatabaseUtils.queryNumEntries(db,AppTFGLuismi.TB_ARCHIVOSDECONSULTA).toInt()
+            if (numArchCon > 0){
+                val qry = "SELECT ${Contract.ArchConsulta.ArchConID} FROM ${AppTFGLuismi.TB_ARCHIVOSDECONSULTA}"
+                val c = db.rawQuery(qry,null)
+                //vamos al inicio de la tabla
+                c.moveToFirst()
+                do{
+                    ids.add(c.getInt(c.getColumnIndex(Contract.ArchConsulta.ArchConID)))
+                }while (c.moveToNext())
+            }else{
+                makeText(AppTFGLuismi.CONTEXT,"No hay archivos de consulta guardados", Toast.LENGTH_SHORT).show()
+            }
+            db.close()
+            return ids
+        }catch (ex:Exception){
+            makeText(AppTFGLuismi.CONTEXT,"No se pudieron mostrar los archivos de consulta", Toast.LENGTH_SHORT).show()
+            return null
+        }
+    }
+
+    //Lo dejo como ejemplo para ver como se hace
+    /*fun getArchConFull():ArrayList<ArchCon>?{
+        try {
+            val archivos = arrayListOf<ArchCon>()
+            val ids = arrayListOf<Int>()
+            val textos = arrayListOf<String>()
+            val db = AppTFGLuismi.DB.readableDatabase
+            //Comprobamos si hay Archivos de consulta guardados
+            val numArchCon = DatabaseUtils.queryNumEntries(db,AppTFGLuismi.TB_ARCHIVOSDECONSULTA).toInt()
+            if (numArchCon > 0){
+                val qry = "SELECT * FROM ${AppTFGLuismi.TB_ARCHIVOSDECONSULTA}"
+                val cursor = db.rawQuery(qry,null)
+                //vamos al inicio de la tabla
+                cursor.moveToFirst()
+                do{
+                    ids.add(cursor.getInt(cursor.getColumnIndex(Contract.ArchConsulta.ArchConID)))
+                    textos.add(cursor.getString(cursor.getColumnIndex(Contract.ArchConsulta.texto)))
+                }while (cursor.moveToNext())
+                for(i in 0 .. ids.size){
+                    var archcon = ArchCon(ids.get(i),textos.get(i))
+                    archivos.add(archcon)
+                }
+            }else{
+                makeText(AppTFGLuismi.CONTEXT,"No hay archivos de consulta guardados", Toast.LENGTH_SHORT).show()
+            }
+            db.close()
+            return archivos
+        }catch (ex:Exception){
+            makeText(AppTFGLuismi.CONTEXT,"No se pudieron mostrar los archivos de consulta", Toast.LENGTH_SHORT).show()
+            return null
+        }
+    }*/
 
     fun getProyecto():ArrayList<String>?{
         try {
@@ -224,15 +426,17 @@ class AdminBD {
     fun updateTarea(tarea: Tarea){
         try {
             val db = AppTFGLuismi.DB.writableDatabase
-            var qry = "UPDATE ${AppTFGLuismi.TB_TAREAS}" +
-                    "SET ${Contract.Tarea.TEXTO} = '${tarea.texto}'," +
-                        "${Contract.Tarea.FECHA} = '${tarea.fecha}'," +
-                        "${Contract.Tarea.HORA} = '${tarea.hora}'," +
-                        "${Contract.Tarea.USUARIO_DELEGADO} = '${tarea.usuarioDelegado}'," +
-                        "${Contract.Tarea.TIPO_LISTA} = '${tarea.tipoLista}'," +
-                        "${Contract.Tarea.PROYECTO} = '${tarea.proyecto}';"
+            var qry = "UPDATE ${AppTFGLuismi.TB_TAREAS} " +
+                      "SET ${Contract.Tarea.TEXTO} = '${tarea.texto}', " +
+                        "${Contract.Tarea.FECHA} = '${tarea.fecha}', " +
+                        "${Contract.Tarea.HORA} = '${tarea.hora}', " +
+                        "${Contract.Tarea.USUARIO_DELEGADO} = '${tarea.usuarioDelegado}', " +
+                        "${Contract.Tarea.TIPO_LISTA} = '${tarea.tipoLista}', " +
+                        "${Contract.Tarea.PROYECTO} = '${tarea.proyecto}' " +
+                      "WHERE ${Contract.Tarea.tareaID} = '${tarea.tareaid}';"
             db.execSQL(qry)
             db.close()
+            makeText(AppTFGLuismi.CONTEXT,"La tarea se actualizo correctamente", Toast.LENGTH_SHORT).show()
         }catch (ex:Exception){
             makeText(AppTFGLuismi.CONTEXT,"No se pudo actualizar la tarea", Toast.LENGTH_SHORT).show()
         }
@@ -241,10 +445,12 @@ class AdminBD {
     fun updateArchCon(archCon: ArchCon){
         try {
             val db = AppTFGLuismi.DB.writableDatabase
-            var qry = "UPDATE ${AppTFGLuismi.TB_ARCHIVOSDECONSULTA}" +
-                    "SET ${Contract.ArchConsulta.texto} = '${archCon.texto}';"
+            var qry = "UPDATE ${AppTFGLuismi.TB_ARCHIVOSDECONSULTA} " +
+                    "SET ${Contract.ArchConsulta.texto} = '${archCon.texto}' " +
+                    "WHERE ${Contract.ArchConsulta.ArchConID} = '${archCon.id}';"
             db.execSQL(qry)
             db.close()
+            makeText(AppTFGLuismi.CONTEXT,"El archivo de consulta se actualizo correctamente", Toast.LENGTH_SHORT).show()
         }catch (ex:Exception){
             makeText(AppTFGLuismi.CONTEXT,"No se pudo actualizar el archivo de consulta", Toast.LENGTH_SHORT).show()
         }
@@ -253,11 +459,12 @@ class AdminBD {
     fun updateProyecto(proyecto: Proyecto){
         try {
             val db = AppTFGLuismi.DB.writableDatabase
-            var qry = "UPDATE ${AppTFGLuismi.TB_PROYECTOS}" +
-                    "SET ${Contract.Proyectos.ProyectoID} = '${proyecto.id}'," +
-                    "${Contract.Proyectos.DESCRIPCION} = '${proyecto.descripcion}';"
+            var qry = "UPDATE ${AppTFGLuismi.TB_PROYECTOS} " +
+                    "SET ${Contract.Proyectos.DESCRIPCION} = '${proyecto.descripcion}' " +
+                    "WHERE ${Contract.Proyectos.ProyectoID} = '${proyecto.id}';"
             db.execSQL(qry)
             db.close()
+            makeText(AppTFGLuismi.CONTEXT,"El proyecto se actualizo correctamente", Toast.LENGTH_SHORT).show()
         }catch (ex:Exception){
             makeText(AppTFGLuismi.CONTEXT,"No se pudo actualizar el proyecto", Toast.LENGTH_SHORT).show()
         }
@@ -266,11 +473,13 @@ class AdminBD {
     fun updateArchProy(archProy: ArchProy){
         try {
             val db = AppTFGLuismi.DB.writableDatabase
-            var qry = "UPDATE ${AppTFGLuismi.TB_ARCHIVOSDEPROYECTOS}" +
-                    "SET ${Contract.ArchProyectos.texto} = '${archProy.texto}'," +
-                        "${Contract.ArchProyectos.PROYECTO} = '${archProy.proyecto}';"
+            var qry = "UPDATE ${AppTFGLuismi.TB_ARCHIVOSDEPROYECTOS} " +
+                    "SET ${Contract.ArchProyectos.texto} = '${archProy.texto}', " +
+                        "${Contract.ArchProyectos.PROYECTO} = '${archProy.proyecto}' " +
+                    "WHERE ${Contract.ArchProyectos.ArchProyID} = '${archProy.id}';"
             db.execSQL(qry)
             db.close()
+            makeText(AppTFGLuismi.CONTEXT,"El archivo de proyecto se actualizo correctamente", Toast.LENGTH_SHORT).show()
         }catch (ex:Exception){
             makeText(AppTFGLuismi.CONTEXT,"No se pudo actualizar el archivo de proyecto", Toast.LENGTH_SHORT).show()
         }

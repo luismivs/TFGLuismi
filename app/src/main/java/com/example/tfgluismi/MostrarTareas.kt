@@ -80,7 +80,7 @@ class MostrarTareas : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item!!.itemId){
             R.id.action_add -> {
-                val intentAddTarea = Intent(applicationContext,AgregarTarea::class.java)
+                val intentAddTarea = Intent(applicationContext,DetalleTarea::class.java)
                 startActivity(intentAddTarea)
                 return true
             }

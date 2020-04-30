@@ -2,6 +2,7 @@ package com.example.tfgluismi.Fragments
 
 import Data.AdminBD
 import Data.AppTFGLuismi
+import Data.ArchCon
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -13,10 +14,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.tfgluismi.AgregarArchCon
-import com.example.tfgluismi.MostrarArchCon
-import com.example.tfgluismi.MostrarProyectos
-import com.example.tfgluismi.R
+import com.example.tfgluismi.*
 import kotlinx.android.synthetic.main.activity_mostrar_arch_con.*
 import kotlinx.android.synthetic.main.activity_mostrar_arch_con.view.*
 
@@ -26,8 +24,9 @@ import kotlinx.android.synthetic.main.activity_mostrar_arch_con.view.*
 class MostrarArchConFragment : Fragment() {
 
     val BdAdmin = AdminBD()
-    lateinit var textos: ArrayList<String>
     lateinit var globalContext: Context
+    lateinit var textos: ArrayList<String>
+    lateinit var ids: ArrayList<Int>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,15 +53,30 @@ class MostrarArchConFragment : Fragment() {
     //-------------------------------------------------------CREATES-----------------------------------------------------------------------------
 
     fun crearArchCon(){
+
         textos = BdAdmin.getArchCon()!!
+        ids = BdAdmin.getArchConId()!!
         globalContext = this.getActivity()!!
+
         val adaptador = ArrayAdapter(globalContext,android.R.layout.simple_list_item_1,textos!!)
         ListArchCon.adapter = adaptador
 
         //Al seleccionar un elemento de la lista
         ListArchCon.onItemClickListener = AdapterView.OnItemClickListener{ adapterView, view, i, l ->
-            val item = textos!!.get(i)
-            Toast.makeText(AppTFGLuismi.CONTEXT, item, Toast.LENGTH_SHORT).show()
+            val itemTx = textos!!.get(i)
+            val itemId = ids!!.get(i)
+
+            val intent = Intent(activity, ActualizarArchCon::class.java)
+
+            //Creamos un objeto Bundle para mandar datos ID y texto a la activity ActualizarArchCon
+            val bundle = Bundle()
+            //Los objetos Bundle funcionan con pares clave ("itemId") - valor (ids!!.get(i))
+            bundle.putInt("itemId",ids!!.get(i))
+            bundle.putString("itemTx",textos!!.get(i))
+            //Se añade el contenido del Bundle al intent
+            intent.putExtras(bundle)
+
+            startActivity(intent)
         }
     }
 

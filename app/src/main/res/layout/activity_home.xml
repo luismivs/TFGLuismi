@@ -62,7 +62,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txPrincipal" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txContTareas"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"

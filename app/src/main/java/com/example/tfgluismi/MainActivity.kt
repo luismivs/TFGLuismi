@@ -79,13 +79,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 fragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.container, CalendarioFragment())
                 fragmentTransaction.commit()
-                toolbar.setTitle("OrganIce - Calendario")
+                toolbar.setTitle("OrganIce - Programadas")
             }
             R.id.siguienteMenuDrawer -> {
                 fragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.container, SiguientesFragment())
                 fragmentTransaction.commit()
-                toolbar.setTitle("OrganIce - Siguientes")
+                toolbar.setTitle("OrganIce - Cuando puedas")
             }
             R.id.delegadasMenuDrawer -> {
                 fragmentTransaction = fragmentManager.beginTransaction()
