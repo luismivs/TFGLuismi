@@ -29,8 +29,8 @@
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginRight="120dp"
         android:ems="10"
         android:hint="Fecha"
         android:inputType="date"
@@ -45,8 +45,8 @@
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginRight="120dp"
         android:ems="10"
         android:hint="Hora"
         android:inputType="time"
@@ -145,10 +145,38 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
         android:ems="10"
-        android:text="Tipo de Lista"
         android:inputType="textPersonName"
+        android:text="Tipo de Lista"
         app:layout_constraintEnd_toStartOf="@+id/SpinnerLista"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txTexto" />
+
+    <Button
+        android:id="@+id/btFecha"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/ic_calendar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txFecha"
+        app:layout_constraintTop_toBottomOf="@+id/txtTipoLista" />
+
+    <Button
+        android:id="@+id/btHora"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txHora"
+        app:layout_constraintTop_toBottomOf="@+id/txFecha"
+        android:background="@drawable/ic_clock"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
