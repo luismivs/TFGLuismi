@@ -2,4 +2,14 @@
     <string name="app_name">TFGLuismi</string>
     <string name="open">open</string>
     <string name="close">close</string>
+
+    <string-array name="nombreListas">
+        <item>Seleccione</item>
+        <item>Programadas</item>
+        <item>Cuando Puedas</item>
+        <item>Delegadas</item>
+        <item>Algun dia</item>
+        <item>Proyectos</item>
+    </string-array>
+
 </resources>

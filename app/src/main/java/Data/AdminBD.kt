@@ -188,6 +188,47 @@ class AdminBD {
             return null
         }
     }
+    fun getTareasFull():ArrayList<Tarea>?{
+        try {
+            val tareas = arrayListOf<Tarea>()
+            val ids = arrayListOf<Int>()
+            val textos = arrayListOf<String>()
+            val fechas = arrayListOf<String>()
+            val horas = arrayListOf<String>()
+            val usuariosDelegados = arrayListOf<String>()
+            val tipoListas = arrayListOf<String>()
+            val pro = arrayListOf<String>()
+            val db = AppTFGLuismi.DB.readableDatabase
+            //Comprobamos si hay Archivos de consulta guardados
+            val numTareas = DatabaseUtils.queryNumEntries(db,AppTFGLuismi.TB_TAREAS).toInt()
+            if (numTareas > 0){
+                val qry = "SELECT * FROM ${AppTFGLuismi.TB_TAREAS}"
+                val cursor = db.rawQuery(qry,null)
+                //vamos al inicio de la tabla
+                cursor.moveToFirst()
+                do{
+                    ids.add(cursor.getInt(cursor.getColumnIndex(Contract.Tarea.tareaID)))
+                    textos.add(cursor.getString(cursor.getColumnIndex(Contract.Tarea.TEXTO)))
+                    fechas.add(cursor.getString(cursor.getColumnIndex(Contract.Tarea.FECHA)))
+                    horas.add(cursor.getString(cursor.getColumnIndex(Contract.Tarea.HORA)))
+                    usuariosDelegados.add(cursor.getString(cursor.getColumnIndex(Contract.Tarea.USUARIO_DELEGADO)))
+                    tipoListas.add(cursor.getString(cursor.getColumnIndex(Contract.Tarea.TIPO_LISTA)))
+                    pro.add(cursor.getString(cursor.getColumnIndex(Contract.Tarea.PROYECTO)))
+                }while (cursor.moveToNext())
+                for(i in 0 .. ids.size){
+                    var tarea = Tarea(ids.get(i),textos.get(i),fechas.get(i),horas.get(i), usuariosDelegados.get(i), tipoListas.get(i), pro.get(i))
+                    tareas.add(tarea)
+                }
+            }else{
+                makeText(AppTFGLuismi.CONTEXT,"No hay archivos de consulta guardados", Toast.LENGTH_SHORT).show()
+            }
+            db.close()
+            return tareas
+        }catch (ex:Exception){
+            makeText(AppTFGLuismi.CONTEXT,"No se pudieron mostrar los archivos de consulta", Toast.LENGTH_SHORT).show()
+            return null
+        }
+    }
 
     fun getArchCon():ArrayList<String>?{
         try {
@@ -240,7 +281,7 @@ class AdminBD {
     }
 
     //Lo dejo como ejemplo para ver como se hace
-    /*fun getArchConFull():ArrayList<ArchCon>?{
+   /* fun getArchConFull():ArrayList<ArchCon>?{
         try {
             val archivos = arrayListOf<ArchCon>()
             val ids = arrayListOf<Int>()

@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 fragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.container, MostrarArchConFragment())
                 fragmentTransaction.commit()
-                toolbar.setTitle("OrganIce - Arch. consulta genreal")
+                toolbar.setTitle("OrganIce - Notas de consulta")
             }
         }
         return false

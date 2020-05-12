@@ -28,6 +28,13 @@ class AlgunDiaFragment: Fragment() {
     lateinit var usuariosDelegados: ArrayList<String>
     lateinit var tipoListas: ArrayList<String>
     lateinit var proyectos: ArrayList<String>
+    lateinit var copiaTextos: ArrayList<String>
+    lateinit var copiaIds: ArrayList<Int>
+    lateinit var copiaFechas: ArrayList<String>
+    lateinit var copiaHoras: ArrayList<String>
+    lateinit var copiaUsuariosDelegados: ArrayList<String>
+    lateinit var copiaTipoListas: ArrayList<String>
+    lateinit var copiaProyectos: ArrayList<String>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,6 +55,7 @@ class AlgunDiaFragment: Fragment() {
 
     fun crearTareas() {
 
+        //Asignamos los valores de la base de datos a sus variables
         textos = BdAdmin.getTareas()!!
         ids = BdAdmin.getTareasId()!!
         fechas = BdAdmin.getTareasFecha()!!
@@ -57,7 +65,38 @@ class AlgunDiaFragment: Fragment() {
         proyectos = BdAdmin.getTareasProyecto()!!
         globalContext = this.getActivity()!!
 
-        val adaptador = ArrayAdapter(globalContext, android.R.layout.simple_list_item_1, textos!!)
+        //Creamos copias de las variables anteriores para trabajar con ellas a la hora de selecionar un elemento de listView y asi
+        //no tener fallos en los indices de las tareas para mandarlos por el bundel y filtrar correctamente en el listview
+        copiaTextos = textos.clone() as ArrayList<String>
+        copiaIds = ids.clone() as ArrayList<Int>
+        copiaFechas = fechas.clone() as ArrayList<String>
+        copiaHoras = horas.clone() as ArrayList<String>
+        copiaUsuariosDelegados = usuariosDelegados.clone() as ArrayList<String>
+        copiaTipoListas = tipoListas.clone() as ArrayList<String>
+        copiaProyectos = proyectos.clone() as ArrayList<String>
+
+        //Filtramos las tareas que deben mostrarse (que sean TipoLista = Algun dia)
+        var size = tipoListas.size
+        if(size>=1) {
+            size = tipoListas.size - 1
+            var aux = -1
+            for(i in 0..size){
+                if(tipoListas.get(i) != "Algun dia"){
+                    var cont = i
+                    aux = aux + 1
+                    copiaTextos.removeAt(cont-aux)
+                    copiaIds.removeAt(cont-aux)
+                    copiaFechas.removeAt(cont-aux)
+                    copiaHoras.removeAt(cont-aux)
+                    copiaUsuariosDelegados.removeAt(cont-aux)
+                    copiaTipoListas.removeAt(cont-aux)
+                    copiaProyectos.removeAt(cont-aux)
+                }
+            }
+        }
+
+
+        val adaptador = ArrayAdapter(globalContext, android.R.layout.simple_list_item_1, copiaTextos!!)
         ListTareas.adapter = adaptador
 
         //Al seleccionar un elemento de la lista
@@ -68,13 +107,13 @@ class AlgunDiaFragment: Fragment() {
             //Creamos un objeto Bundle para mandar datos a la activity DetalleTarea
             val bundle = Bundle()
             //Los objetos Bundle funcionan con pares clave ("itemId") - valor (ids!!.get(i))
-            bundle.putInt("itemId",ids!!.get(i))
-            bundle.putString("itemTx",textos!!.get(i))
-            bundle.putString("itemF",fechas!!.get(i))
-            bundle.putString("itemH",horas!!.get(i))
-            bundle.putString("itemUD",usuariosDelegados!!.get(i))
-            bundle.putString("itemTL",tipoListas!!.get(i))
-            bundle.putString("itemP",proyectos!!.get(i))
+            bundle.putInt("itemId",copiaIds!!.get(i))
+            bundle.putString("itemTx",copiaTextos!!.get(i))
+            bundle.putString("itemF",copiaFechas!!.get(i))
+            bundle.putString("itemH",copiaHoras!!.get(i))
+            bundle.putString("itemUD",copiaUsuariosDelegados!!.get(i))
+            bundle.putString("itemTL",copiaTipoListas!!.get(i))
+            bundle.putString("itemP",copiaProyectos!!.get(i))
             //Se añade el contenido del Bundle al intent
             intent.putExtras(bundle)
 
@@ -88,7 +127,7 @@ class AlgunDiaFragment: Fragment() {
         ListTareas.onItemLongClickListener =
             AdapterView.OnItemLongClickListener { adapterView, view, i, l ->
 
-                val texto = textos.get(i)
+                val texto = copiaTextos.get(i)
                 globalContext = this.getActivity()!!
                 val dialog = AlertDialog.Builder(globalContext)
                 dialog.setTitle("Confirmación")
