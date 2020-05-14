@@ -7,7 +7,7 @@ import java.lang.Exception
 
 data class Tarea(var tareaid:Int, var texto:String, var fecha:String, var hora:String, var usuarioDelegado:String, var tipoLista: String, var proyecto: String)
 data class ArchCon(var id: Int, var texto:String)
-data class Proyecto(var id: String, var descripcion: String)
+data class Proyecto(var id: Int, var texto:String, var descripcion: String)
 data class ArchProy(var id: Int, var texto:String, var proyecto: String)
 
 class AdminBD {
@@ -315,7 +315,32 @@ class AdminBD {
 
     fun getProyecto():ArrayList<String>?{
         try {
-            val textosid = arrayListOf<String>()
+            val textos = arrayListOf<String>()
+            val db = AppTFGLuismi.DB.readableDatabase
+            //Comprobamos si hay proyectos guardados
+            val numProyectos = DatabaseUtils.queryNumEntries(db,AppTFGLuismi.TB_PROYECTOS).toInt()
+            if (numProyectos > 0){
+                val qry = "SELECT ${Contract.Proyectos.TEXTO} FROM ${AppTFGLuismi.TB_PROYECTOS}"
+                val c = db.rawQuery(qry,null)
+                //vamos al inicio de la tabla
+                c.moveToFirst()
+                do{
+                    textos.add(c.getString(c.getColumnIndex(Contract.Proyectos.TEXTO)))
+                }while (c.moveToNext())
+            }else{
+                makeText(AppTFGLuismi.CONTEXT,"No hay proyectos guardados", Toast.LENGTH_SHORT).show()
+            }
+            db.close()
+            return textos
+        }catch (ex:Exception){
+            makeText(AppTFGLuismi.CONTEXT,"No se pudieron mostrar los proyectos", Toast.LENGTH_SHORT).show()
+            return null
+        }
+    }
+
+    fun getProyectoId():ArrayList<Int>?{
+        try {
+            val Ids = arrayListOf<Int>()
             val db = AppTFGLuismi.DB.readableDatabase
             //Comprobamos si hay proyectos guardados
             val numProyectos = DatabaseUtils.queryNumEntries(db,AppTFGLuismi.TB_PROYECTOS).toInt()
@@ -325,13 +350,38 @@ class AdminBD {
                 //vamos al inicio de la tabla
                 c.moveToFirst()
                 do{
-                    textosid.add(c.getString(c.getColumnIndex(Contract.Proyectos.ProyectoID)))
+                    Ids.add(c.getInt(c.getColumnIndex(Contract.Proyectos.ProyectoID)))
                 }while (c.moveToNext())
             }else{
                 makeText(AppTFGLuismi.CONTEXT,"No hay proyectos guardados", Toast.LENGTH_SHORT).show()
             }
             db.close()
-            return textosid
+            return Ids
+        }catch (ex:Exception){
+            makeText(AppTFGLuismi.CONTEXT,"No se pudieron mostrar los proyectos", Toast.LENGTH_SHORT).show()
+            return null
+        }
+    }
+
+    fun getProyectoDes():ArrayList<String>?{
+        try {
+            val des = arrayListOf<String>()
+            val db = AppTFGLuismi.DB.readableDatabase
+            //Comprobamos si hay proyectos guardados
+            val numProyectos = DatabaseUtils.queryNumEntries(db,AppTFGLuismi.TB_PROYECTOS).toInt()
+            if (numProyectos > 0){
+                val qry = "SELECT ${Contract.Proyectos.DESCRIPCION} FROM ${AppTFGLuismi.TB_PROYECTOS}"
+                val c = db.rawQuery(qry,null)
+                //vamos al inicio de la tabla
+                c.moveToFirst()
+                do{
+                    des.add(c.getString(c.getColumnIndex(Contract.Proyectos.DESCRIPCION)))
+                }while (c.moveToNext())
+            }else{
+                makeText(AppTFGLuismi.CONTEXT,"No hay proyectos guardados", Toast.LENGTH_SHORT).show()
+            }
+            db.close()
+            return des
         }catch (ex:Exception){
             makeText(AppTFGLuismi.CONTEXT,"No se pudieron mostrar los proyectos", Toast.LENGTH_SHORT).show()
             return null
@@ -357,6 +407,56 @@ class AdminBD {
             }
             db.close()
             return textos
+        }catch (ex:Exception){
+            makeText(AppTFGLuismi.CONTEXT,"No se pudieron mostrar los archivos de proyectos", Toast.LENGTH_SHORT).show()
+            return null
+        }
+    }
+
+    fun getArchProyId():ArrayList<Int>?{
+        try {
+            val ids = arrayListOf<Int>()
+            val db = AppTFGLuismi.DB.readableDatabase
+            //Comprobamos si hay Archivos de proyecto guardados
+            val numArchProy = DatabaseUtils.queryNumEntries(db,AppTFGLuismi.TB_ARCHIVOSDEPROYECTOS).toInt()
+            if (numArchProy > 0){
+                val qry = "SELECT ${Contract.ArchProyectos.ArchProyID} FROM ${AppTFGLuismi.TB_ARCHIVOSDEPROYECTOS}"
+                val c = db.rawQuery(qry,null)
+                //vamos al inicio de la tabla
+                c.moveToFirst()
+                do{
+                    ids.add(c.getInt(c.getColumnIndex(Contract.ArchProyectos.ArchProyID)))
+                }while (c.moveToNext())
+            }else{
+                makeText(AppTFGLuismi.CONTEXT,"No hay archivos de proyectos guardados", Toast.LENGTH_SHORT).show()
+            }
+            db.close()
+            return ids
+        }catch (ex:Exception){
+            makeText(AppTFGLuismi.CONTEXT,"No se pudieron mostrar los archivos de proyectos", Toast.LENGTH_SHORT).show()
+            return null
+        }
+    }
+
+    fun getArchProyProyecto():ArrayList<String>?{
+        try {
+            val proyectos = arrayListOf<String>()
+            val db = AppTFGLuismi.DB.readableDatabase
+            //Comprobamos si hay Archivos de proyecto guardados
+            val numArchProy = DatabaseUtils.queryNumEntries(db,AppTFGLuismi.TB_ARCHIVOSDEPROYECTOS).toInt()
+            if (numArchProy > 0){
+                val qry = "SELECT ${Contract.ArchProyectos.PROYECTO} FROM ${AppTFGLuismi.TB_ARCHIVOSDEPROYECTOS}"
+                val c = db.rawQuery(qry,null)
+                //vamos al inicio de la tabla
+                c.moveToFirst()
+                do{
+                    proyectos.add(c.getString(c.getColumnIndex(Contract.ArchProyectos.PROYECTO)))
+                }while (c.moveToNext())
+            }else{
+                makeText(AppTFGLuismi.CONTEXT,"No hay archivos de proyectos guardados", Toast.LENGTH_SHORT).show()
+            }
+            db.close()
+            return proyectos
         }catch (ex:Exception){
             makeText(AppTFGLuismi.CONTEXT,"No se pudieron mostrar los archivos de proyectos", Toast.LENGTH_SHORT).show()
             return null
@@ -394,8 +494,8 @@ class AdminBD {
         try {
             val db = AppTFGLuismi.DB.writableDatabase
             var qry = "INSERT INTO ${AppTFGLuismi.TB_PROYECTOS} (" +
-                    "${Contract.Proyectos.ProyectoID},${Contract.Proyectos.DESCRIPCION})" +
-                    "VALUES('${proyecto.id}','${proyecto.descripcion}');"
+                    "${Contract.Proyectos.TEXTO},${Contract.Proyectos.DESCRIPCION})" +
+                    "VALUES('${proyecto.texto}','${proyecto.descripcion}');"
             db.execSQL(qry)
             db.close()
         }catch (ex:Exception){
@@ -440,10 +540,10 @@ class AdminBD {
         }
     }
 
-    fun removeProyecto(id: String){
+    fun removeProyecto(texto: String){
         try{
             val db = AppTFGLuismi.DB.writableDatabase
-            var qry = "DELETE FROM ${AppTFGLuismi.TB_PROYECTOS} WHERE ${Contract.Proyectos.ProyectoID} = '$id';"
+            var qry = "DELETE FROM ${AppTFGLuismi.TB_PROYECTOS} WHERE ${Contract.Proyectos.TEXTO} = '$texto';"
             db.execSQL(qry)
             db.close()
         }catch (ex:Exception){

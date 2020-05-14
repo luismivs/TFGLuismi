@@ -23,6 +23,7 @@ class Contract {
     class Proyectos: BaseColumns{
         companion object{
             var ProyectoID = "id"
+            var TEXTO = "texto"
             var DESCRIPCION = "descripcion"
         }
     }

@@ -51,12 +51,6 @@
                 android:title="Proyectos">
 
             </item>
-            <item
-                android:id="@+id/archProyMenuDrawer"
-                android:icon="@drawable/ic_file"
-                android:title="Archivos de proyectos">
-
-            </item>
         </menu>
     </item>
 

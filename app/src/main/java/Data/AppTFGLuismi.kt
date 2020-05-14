@@ -9,7 +9,7 @@ class AppTFGLuismi: Application() {
         lateinit var CONTEXT: Context
         lateinit var DB: InitDb
         val DB_NAME = "TFGLuismiDB.db"
-        val VERSION = 6
+        val VERSION = 9
         val TB_TAREAS = "tbTareas"
         val TB_PROYECTOS = "tbProyectos"
         val TB_ARCHIVOSDEPROYECTOS = "tbAchProyectos"

@@ -12,6 +12,7 @@ import android.widget.*
 import androidx.core.view.get
 import kotlinx.android.synthetic.main.activity_detalles_tarea.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class DetalleTarea : AppCompatActivity(), View.OnClickListener {
 
@@ -25,6 +26,7 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
     var TipoLista: String? = ""
     var Proyecto: String? = ""
     var Seleccion: String? = ""
+    var SeleccionProy: String? = ""
     lateinit var plainTextFecha: EditText
     lateinit var plainTextHora: EditText
     var dias: Int = 0;
@@ -103,13 +105,50 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
 
         }
 
-        val plainTextProyecto: EditText = findViewById(R.id.txProyectoDeTarea)
-        plainTextProyecto.setText(Proyecto)
+        //Tratamiento del spinner para insertar nombre de proyecto
+        var nomProyBD: ArrayList<String>
+        var nomProy: ArrayList<String>
+        nomProyBD = BdAdmin.getProyecto()!!
+        nomProy = nomProyBD.clone() as ArrayList<String>
+        nomProy.clear()
+        nomProy.add("Seleccione")
+        var size = nomProyBD.size-1
+        for (i in 0..size){
+            nomProy.add(nomProyBD.get(i))
+        }
+
+        val spinnerProy: Spinner = findViewById(R.id.spinnerProyecto)
+       ArrayAdapter(this,android.R.layout.simple_spinner_item, nomProy).also { adapter ->
+           adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+           spinnerProy.adapter = adapter
+       }
+
+        spinnerProy.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                val selectedItem = parent.getItemAtPosition(position).toString()
+                SeleccionProy = selectedItem
+            }
+
+        }
+
+        val textViewP: TextView = findViewById(R.id.twProyectoDeTarea)
+        if (Proyecto != "Seleccione") {
+            textViewP.setText("Proyecto: " + Proyecto)
+        } else textViewP.setText("Proyecto: ")
     }
 
     fun guardarTarea_click() {
         btActualizarTarea.setOnClickListener() {
-            if (Seleccion.equals("Seleccione")) {
+            if (Seleccion.equals("Seleccione") && SeleccionProy.equals("Seleccione")) {
                 val tarea = Tarea(
                     ID,
                     txTexto.text.toString(),
@@ -117,9 +156,34 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
                     txHora.text.toString(),
                     txUsuarioDelegado.text.toString(),
                     TipoLista.toString(),
-                    txProyectoDeTarea.text.toString()
+                    Proyecto.toString()
                 )
                 BdAdmin.updateTarea(tarea)
+
+            } else if (Seleccion != "Seleccione" && SeleccionProy.equals("Seleccione")) {
+                val tarea = Tarea(
+                    ID,
+                    txTexto.text.toString(),
+                    txFecha.text.toString(),
+                    txHora.text.toString(),
+                    txUsuarioDelegado.text.toString(),
+                    Seleccion.toString(),
+                    Proyecto.toString()
+                )
+                BdAdmin.updateTarea(tarea)
+
+            } else if(Seleccion.equals("Seleccione") && SeleccionProy != "Seleccione") {
+                val tarea = Tarea(
+                    ID,
+                    txTexto.text.toString(),
+                    txFecha.text.toString(),
+                    txHora.text.toString(),
+                    txUsuarioDelegado.text.toString(),
+                    TipoLista.toString(),
+                    SeleccionProy.toString()
+                )
+                BdAdmin.updateTarea(tarea)
+
             } else {
                 val tarea = Tarea(
                     ID,
@@ -128,7 +192,7 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
                     txHora.text.toString(),
                     txUsuarioDelegado.text.toString(),
                     Seleccion.toString(),
-                    txProyectoDeTarea.text.toString()
+                    SeleccionProy.toString()
                 )
                 BdAdmin.updateTarea(tarea)
             }

@@ -84,7 +84,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txProyectoDeTarea" />
+        app:layout_constraintTop_toBottomOf="@+id/twProyectoDeTarea" />
 
     <Spinner
         android:id="@+id/SpinnerLista"
@@ -102,23 +102,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/txtTipoLista"
         app:layout_constraintTop_toBottomOf="@+id/txTexto" />
-
-    <EditText
-        android:id="@+id/txProyectoDeTarea"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
-        android:ems="10"
-        android:hint="Proyecto"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txUsuarioDelegado" />
 
     <TextView
         android:id="@+id/textViewIdTareas"
@@ -146,7 +129,7 @@
         android:layout_marginTop="30dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Tipo de Lista"
+        android:text="Tipo de Lista: "
         app:layout_constraintEnd_toStartOf="@+id/SpinnerLista"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txTexto" />
@@ -178,5 +161,34 @@
         app:layout_constraintStart_toEndOf="@+id/txHora"
         app:layout_constraintTop_toBottomOf="@+id/txFecha"
         android:background="@drawable/ic_clock"/>
+
+    <TextView
+        android:id="@+id/twProyectoDeTarea"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Proyecto: "
+        android:textSize="18dp"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerProyecto"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txUsuarioDelegado" />
+
+    <Spinner
+        android:id="@+id/spinnerProyecto"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.963"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txUsuarioDelegado" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

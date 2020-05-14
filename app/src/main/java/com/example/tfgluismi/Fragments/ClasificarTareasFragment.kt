@@ -77,7 +77,7 @@ class ClasificarTareasFragment : Fragment() {
        copiaTipoListas = tipoListas.clone() as ArrayList<String>
        copiaProyectos = proyectos.clone() as ArrayList<String>
 
-        //Filtramos las tareas que deben mostrarse (que aun no hayan sido clasificadas)
+        //Filtramos las tareas que deben mostrarse (las cuales aun no hayan sido clasificadas)
         var size = tipoListas.size
         if(size>=1) {
             size = tipoListas.size - 1

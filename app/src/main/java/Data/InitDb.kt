@@ -14,18 +14,17 @@ class InitDb: SQLiteOpenHelper(AppTFGLuismi.CONTEXT, AppTFGLuismi.DB_NAME, null,
             "${Contract.Tarea.AUDIO} TEXT," +
             "${Contract.Tarea.USUARIO_DELEGADO} TEXT," +
             "${Contract.Tarea.PROYECTO} TEXT," +
-            "${Contract.Tarea.TIPO_LISTA} TEXT," +
-            "FOREIGN KEY(${Contract.Tarea.PROYECTO}) REFERENCES ${AppTFGLuismi.TB_PROYECTOS}(${Contract.Proyectos.ProyectoID}));"
+            "${Contract.Tarea.TIPO_LISTA} TEXT);"
 
     val qryCreateTablaProyectos = "CREATE TABLE ${AppTFGLuismi.TB_PROYECTOS}(" +
-            "${Contract.Proyectos.ProyectoID} TEXT PRIMARY KEY," +
+            "${Contract.Proyectos.ProyectoID} INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "${Contract.Proyectos.TEXTO} TEXT NOT NULL," +
             "${Contract.Proyectos.DESCRIPCION} TEXT);"
 
     val qryCreateTablaArchProyecto = "CREATE TABLE ${AppTFGLuismi.TB_ARCHIVOSDEPROYECTOS}(" +
             "${Contract.ArchProyectos.ArchProyID} INTEGER PRIMARY KEY AUTOINCREMENT," +
             "${Contract.ArchProyectos.texto} TEXT NOT NULL," +
-            "${Contract.ArchProyectos.PROYECTO} TEXT NOT NULL," +
-            "FOREIGN KEY(${Contract.ArchProyectos.PROYECTO}) REFERENCES ${AppTFGLuismi.TB_PROYECTOS}(${Contract.Proyectos.ProyectoID}));"
+            "${Contract.ArchProyectos.PROYECTO} TEXT NOT NULL);"
 
     val qryCreateTablaArchConsulta = "CREATE TABLE ${AppTFGLuismi.TB_ARCHIVOSDECONSULTA}(" +
             "${Contract.ArchConsulta.ArchConID} INTEGER PRIMARY KEY AUTOINCREMENT," +

@@ -18,7 +18,8 @@ class AgregarProyecto : AppCompatActivity() {
 
     fun guardarProyecto_click(){
         buttonProyectos.setOnClickListener(){
-            val proyecto = Proyecto(txTextoIdProyecto.id.toString(), txDescripcionProyecto.text.toString())
+            //val proyecto = Proyecto(txTextoIdProyecto.id.toString(), txDescripcionProyecto.text.toString())
+            val proyecto = Proyecto(0,txTextoProyecto.text.toString(), txDescripcionProyecto.text.toString())
             BdAdmin.addProyecto(proyecto)
             finish()
         }

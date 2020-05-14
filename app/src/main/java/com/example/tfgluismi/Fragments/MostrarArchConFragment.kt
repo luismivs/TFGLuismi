@@ -63,8 +63,6 @@ class MostrarArchConFragment : Fragment() {
 
         //Al seleccionar un elemento de la lista
         ListArchCon.onItemClickListener = AdapterView.OnItemClickListener{ adapterView, view, i, l ->
-            val itemTx = textos!!.get(i)
-            val itemId = ids!!.get(i)
 
             val intent = Intent(activity, ActualizarArchCon::class.java)
 
