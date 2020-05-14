@@ -33,6 +33,8 @@
             android:parentActivityName=".MostrarArchProy"></activity>
         <activity android:name=".DetalleTarea"
             android:parentActivityName=".MostrarTareas"></activity>
+        <activity android:name=".DetalleTareaDelegar"
+            android:parentActivityName=".MostrarTareas"></activity>
         <activity android:name=".MostrarTareas"></activity>
     </application>
 

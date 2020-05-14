@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.tfgluismi.DetalleTarea
+import com.example.tfgluismi.DetalleTareaDelegar
 import com.example.tfgluismi.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_mostrar_tareas.*
@@ -103,7 +104,7 @@ class DelegadasFragment : Fragment() {
         //Al seleccionar un elemento de la lista
         ListTareas.onItemClickListener = AdapterView.OnItemClickListener{ adapterView, view, i, l ->
 
-            val intent = Intent(activity, DetalleTarea::class.java)
+            val intent = Intent(activity, DetalleTareaDelegar::class.java)
 
             //Creamos un objeto Bundle para mandar datos a la activity DetalleTarea
             val bundle = Bundle()
