@@ -21,7 +21,7 @@ class MostrarProyectos: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mostrar_proyectos)
-        eliminarProyecto()
+        //eliminarProyecto()
     }
 
     override fun onStart() {
@@ -48,7 +48,7 @@ class MostrarProyectos: AppCompatActivity() {
     }
 
 //----------------------------------------------------------DELETES-------------------------------------------------------------------
-
+/*
     fun eliminarProyecto(){
         ListProyectos.onItemLongClickListener = AdapterView.OnItemLongClickListener { adapterView, view, i, l ->
 
@@ -68,7 +68,7 @@ class MostrarProyectos: AppCompatActivity() {
             true
         }
     }
-
+*/
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflate = menuInflater
         inflate.inflate(R.menu.menu_proyectos,menu)

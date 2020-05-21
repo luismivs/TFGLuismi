@@ -1,15 +1,13 @@
 package com.example.tfgluismi
 
 import Data.AdminBD
+import Data.AppTFGLuismi
 import Data.Proyecto
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.EditText
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_detalle_proyecto.*
 import kotlinx.android.synthetic.main.activity_mostrar_tareas.*
@@ -42,6 +40,7 @@ class DetalleProyecto: AppCompatActivity() {
         setContentView(R.layout.activity_detalle_proyecto)
         actualizarProyecto_click()
         consultarArchProy_click()
+        eliminarProyecto()
 
         //Almacenamos los datos que hemos enviado mediante un Bundle atraves del intent del fragment ProyectosFragment
         bundle= this.intent.extras!!
@@ -81,6 +80,29 @@ class DetalleProyecto: AppCompatActivity() {
             //Se añade el contenido del Bundle al intent
             intent.putExtras(bundle2)
             startActivity(intent)
+        }
+    }
+
+    fun eliminarProyecto(){
+        btEliminarProy.setOnClickListener() {
+            if(copiaTextosTareas.size > 0){
+                Toast.makeText(AppTFGLuismi.CONTEXT,"No se puede borrar el proyecto porque contine tareas ",Toast.LENGTH_SHORT).show()
+            }else {
+                val id = texto!!
+
+                val dialog = AlertDialog.Builder(this)
+                dialog.setTitle("Confirmación")
+                dialog.setMessage("¿Quieres borrar el proyecto?")
+                dialog.setPositiveButton("Si") { dialogInterface, i ->
+                    BdAdmin.removeProyecto(id)
+                    finish()
+                }
+                dialog.setNegativeButton("No") { dialogInterface, i ->
+                    dialogInterface.dismiss()
+                }
+                dialog.show()
+                true
+            }
         }
     }
 

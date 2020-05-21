@@ -44,7 +44,7 @@ class ProyectosFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         crearProyecto()
-        eliminarProyecto()
+        //eliminarProyecto()
     }
 
     //-------------------------------------------------------CREATES-----------------------------------------------------------------------------
@@ -78,7 +78,7 @@ class ProyectosFragment : Fragment() {
     }
 
     //----------------------------------------------------------DELETES-------------------------------------------------------------------
-
+/*
     fun eliminarProyecto(){
         ListProyectos.onItemLongClickListener = AdapterView.OnItemLongClickListener { adapterView, view, i, l ->
 
@@ -98,5 +98,5 @@ class ProyectosFragment : Fragment() {
             true
         }
     }
-
+*/
 }
