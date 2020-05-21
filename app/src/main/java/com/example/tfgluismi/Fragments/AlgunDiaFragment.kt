@@ -25,6 +25,7 @@ class AlgunDiaFragment: Fragment() {
     lateinit var ids: ArrayList<Int>
     lateinit var fechas: ArrayList<String>
     lateinit var horas: ArrayList<String>
+    lateinit var imagenes: ArrayList<String>
     lateinit var usuariosDelegados: ArrayList<String>
     lateinit var tipoListas: ArrayList<String>
     lateinit var proyectos: ArrayList<String>
@@ -32,6 +33,7 @@ class AlgunDiaFragment: Fragment() {
     lateinit var copiaIds: ArrayList<Int>
     lateinit var copiaFechas: ArrayList<String>
     lateinit var copiaHoras: ArrayList<String>
+    lateinit var copiaImagenes: ArrayList<String>
     lateinit var copiaUsuariosDelegados: ArrayList<String>
     lateinit var copiaTipoListas: ArrayList<String>
     lateinit var copiaProyectos: ArrayList<String>
@@ -60,6 +62,7 @@ class AlgunDiaFragment: Fragment() {
         ids = BdAdmin.getTareasId()!!
         fechas = BdAdmin.getTareasFecha()!!
         horas = BdAdmin.getTareasHora()!!
+        imagenes = BdAdmin.getTareasImagen()!!
         usuariosDelegados = BdAdmin.getTareasUsuarioDelegado()!!
         tipoListas = BdAdmin.getTareasTipoLista()!!
         proyectos = BdAdmin.getTareasProyecto()!!
@@ -71,6 +74,7 @@ class AlgunDiaFragment: Fragment() {
         copiaIds = ids.clone() as ArrayList<Int>
         copiaFechas = fechas.clone() as ArrayList<String>
         copiaHoras = horas.clone() as ArrayList<String>
+        copiaImagenes = imagenes.clone() as ArrayList<String>
         copiaUsuariosDelegados = usuariosDelegados.clone() as ArrayList<String>
         copiaTipoListas = tipoListas.clone() as ArrayList<String>
         copiaProyectos = proyectos.clone() as ArrayList<String>
@@ -88,6 +92,7 @@ class AlgunDiaFragment: Fragment() {
                     copiaIds.removeAt(cont-aux)
                     copiaFechas.removeAt(cont-aux)
                     copiaHoras.removeAt(cont-aux)
+                    copiaImagenes.removeAt(cont-aux)
                     copiaUsuariosDelegados.removeAt(cont-aux)
                     copiaTipoListas.removeAt(cont-aux)
                     copiaProyectos.removeAt(cont-aux)
@@ -111,6 +116,7 @@ class AlgunDiaFragment: Fragment() {
             bundle.putString("itemTx",copiaTextos!!.get(i))
             bundle.putString("itemF",copiaFechas!!.get(i))
             bundle.putString("itemH",copiaHoras!!.get(i))
+            bundle.putString("itemIm",copiaImagenes!!.get(i))
             bundle.putString("itemUD",copiaUsuariosDelegados!!.get(i))
             bundle.putString("itemTL",copiaTipoListas!!.get(i))
             bundle.putString("itemP",copiaProyectos!!.get(i))

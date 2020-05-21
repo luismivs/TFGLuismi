@@ -5,7 +5,7 @@ import android.widget.Toast
 import android.widget.Toast.makeText
 import java.lang.Exception
 
-data class Tarea(var tareaid:Int, var texto:String, var fecha:String, var hora:String, var usuarioDelegado:String, var tipoLista: String, var proyecto: String)
+data class Tarea(var tareaid:Int, var texto:String, var fecha:String, var hora:String, var imagen:String, var usuarioDelegado:String, var tipoLista: String, var proyecto: String)
 data class ArchCon(var id: Int, var texto:String)
 data class Proyecto(var id: Int, var texto:String, var descripcion: String)
 data class ArchProy(var id: Int, var texto:String, var proyecto: String)
@@ -188,6 +188,32 @@ class AdminBD {
             return null
         }
     }
+
+    fun getTareasImagen():ArrayList<String>?{
+        try {
+            val imagenes = arrayListOf<String>()
+            val db = AppTFGLuismi.DB.readableDatabase
+            //Comprobamos si hay tareas guardadas
+            val numTareas = DatabaseUtils.queryNumEntries(db,AppTFGLuismi.TB_TAREAS).toInt()
+            if (numTareas > 0){
+                val qry = "SELECT ${Contract.Tarea.IMAGEN} FROM ${AppTFGLuismi.TB_TAREAS}"
+                val c = db.rawQuery(qry,null)
+                //vamos al inicio de la tabla
+                c.moveToFirst()
+                do{
+                    imagenes.add(c.getString(c.getColumnIndex(Contract.Tarea.IMAGEN)))
+                }while (c.moveToNext())
+            }else{
+                makeText(AppTFGLuismi.CONTEXT,"No hay tareas guardadas", Toast.LENGTH_SHORT).show()
+            }
+            db.close()
+            return imagenes
+        }catch (ex:Exception){
+            makeText(AppTFGLuismi.CONTEXT,"No se pudieron mostrar las tareas", Toast.LENGTH_SHORT).show()
+            return null
+        }
+    }
+    /*
     fun getTareasFull():ArrayList<Tarea>?{
         try {
             val tareas = arrayListOf<Tarea>()
@@ -229,7 +255,7 @@ class AdminBD {
             return null
         }
     }
-
+    */
     fun getArchCon():ArrayList<String>?{
         try {
             val textos = arrayListOf<String>()
@@ -468,8 +494,8 @@ class AdminBD {
         try {
             val db = AppTFGLuismi.DB.writableDatabase
             var qry = "INSERT INTO ${AppTFGLuismi.TB_TAREAS} (" +
-                    "${Contract.Tarea.TEXTO}, ${Contract.Tarea.FECHA}, ${Contract.Tarea.HORA}, ${Contract.Tarea.USUARIO_DELEGADO}, ${Contract.Tarea.TIPO_LISTA}, ${Contract.Tarea.PROYECTO})" +
-                    "VALUES('${tarea.texto}','${tarea.fecha}','${tarea.hora}','${tarea.usuarioDelegado}','${tarea.tipoLista}','${tarea.proyecto}');"
+                    "${Contract.Tarea.TEXTO}, ${Contract.Tarea.FECHA}, ${Contract.Tarea.HORA}, ${Contract.Tarea.IMAGEN}, ${Contract.Tarea.USUARIO_DELEGADO}, ${Contract.Tarea.TIPO_LISTA}, ${Contract.Tarea.PROYECTO})" +
+                    "VALUES('${tarea.texto}','${tarea.fecha}','${tarea.hora}','${tarea.imagen}','${tarea.usuarioDelegado}','${tarea.tipoLista}','${tarea.proyecto}');"
             db.execSQL(qry)
             db.close()
         }catch (ex:Exception){
@@ -571,6 +597,7 @@ class AdminBD {
                       "SET ${Contract.Tarea.TEXTO} = '${tarea.texto}', " +
                         "${Contract.Tarea.FECHA} = '${tarea.fecha}', " +
                         "${Contract.Tarea.HORA} = '${tarea.hora}', " +
+                        "${Contract.Tarea.IMAGEN} = '${tarea.imagen}', " +
                         "${Contract.Tarea.USUARIO_DELEGADO} = '${tarea.usuarioDelegado}', " +
                         "${Contract.Tarea.TIPO_LISTA} = '${tarea.tipoLista}', " +
                         "${Contract.Tarea.PROYECTO} = '${tarea.proyecto}' " +

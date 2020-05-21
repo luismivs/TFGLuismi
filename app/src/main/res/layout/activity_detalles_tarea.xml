@@ -110,8 +110,8 @@
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginEnd="230dp"
+        android:layout_marginRight="230dp"
         android:layout_marginBottom="70dp"
         android:text="Actual: "
         android:textSize="18dp"
@@ -190,5 +190,27 @@
         app:layout_constraintHorizontal_bias="0.963"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txUsuarioDelegado" />
+
+    <Button
+        android:id="@+id/btMultimedia"
+        android:layout_width="50dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
+        android:background="@drawable/ic_multimedia"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btAddImage"
+        android:layout_width="54dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="28dp"
+        android:background="@drawable/ic_add_imagen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

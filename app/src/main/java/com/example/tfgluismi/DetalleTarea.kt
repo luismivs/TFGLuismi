@@ -5,6 +5,8 @@ import Data.AppTFGLuismi
 import Data.Tarea
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -22,6 +24,7 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
     var Texto: String? = ""
     var Fecha: String? = ""
     var Hora: String? = ""
+    var Imagen: String? = ""
     var UsuarioDelegado: String? = ""
     var TipoLista: String? = ""
     var Proyecto: String? = ""
@@ -34,12 +37,16 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
     var anos: Int = 0;
     var horas: Int = 0;
     var minutos: Int = 0
+    val COD_GALERIA: Int = 10
+    lateinit var path: Uri
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalles_tarea)
         guardarTarea_click()
+        irAMultimedia_click()
+        añadirImagen_click()
 
         //Almacenamos los datos que hemos enviado mediante un Bundle atraves del intent del fragment ClasificarTareasFragment
         bundle = this.intent.extras!!
@@ -48,6 +55,7 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
         Texto = bundle.getString("itemTx")
         Fecha = bundle.getString("itemF")
         Hora = bundle.getString("itemH")
+        Imagen = bundle.getString("itemIm")
         UsuarioDelegado = bundle.getString("itemUD")
         TipoLista = bundle.getString("itemTL")
         Proyecto = bundle.getString("itemP")
@@ -154,6 +162,7 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
                     txTexto.text.toString(),
                     txFecha.text.toString(),
                     txHora.text.toString(),
+                    Imagen.toString(),
                     txUsuarioDelegado.text.toString(),
                     TipoLista.toString(),
                     Proyecto.toString()
@@ -166,6 +175,7 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
                     txTexto.text.toString(),
                     txFecha.text.toString(),
                     txHora.text.toString(),
+                    Imagen.toString(),
                     txUsuarioDelegado.text.toString(),
                     Seleccion.toString(),
                     Proyecto.toString()
@@ -178,6 +188,7 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
                     txTexto.text.toString(),
                     txFecha.text.toString(),
                     txHora.text.toString(),
+                    Imagen.toString(),
                     txUsuarioDelegado.text.toString(),
                     TipoLista.toString(),
                     SeleccionProy.toString()
@@ -190,6 +201,7 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
                     txTexto.text.toString(),
                     txFecha.text.toString(),
                     txHora.text.toString(),
+                    Imagen.toString(),
                     txUsuarioDelegado.text.toString(),
                     Seleccion.toString(),
                     SeleccionProy.toString()
@@ -197,6 +209,42 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
                 BdAdmin.updateTarea(tarea)
             }
             finish()
+        }
+    }
+
+    //Metodo para ir a multimedia
+    fun irAMultimedia_click(){
+        btMultimedia.setOnClickListener(){
+            val intent = Intent(this, Multimedia::class.java)
+
+            //Creamos un objeto Bundle para mandar datos a la activity Multimedia
+            val bundle = Bundle()
+            bundle.putString("itemIm2",Imagen)
+
+            intent.putExtras(bundle)
+
+            startActivity(intent)
+        }
+    }
+
+    //Metodo para añadir una imagen de la galeria a una tarea
+    fun añadirImagen_click(){
+        btAddImage.setOnClickListener(){
+            cargarImagen()
+        }
+    }
+
+    private fun cargarImagen() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        intent.type = "image/*"
+        startActivityForResult(intent, COD_GALERIA)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode==RESULT_OK){
+            path = data!!.data!!
+            Imagen = path.toString()
         }
     }
 
