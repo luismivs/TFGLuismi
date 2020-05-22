@@ -9,8 +9,8 @@
 
     <EditText
         android:id="@+id/txPrincipal"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="366dp"
+        android:layout_height="134dp"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="125dp"
@@ -19,41 +19,19 @@
         android:layout_marginBottom="675dp"
         android:ems="10"
         android:hint="Añade una tarea"
-        android:textSize="18dp"
         android:inputType="textPersonName"
+        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btImagen"
-        android:layout_width="75dp"
-        android:layout_height="50dp"
-        android:onClick="onClick"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/ic_camera"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txPrincipal" />
-
-    <Button
-        android:id="@+id/btAudio"
-        android:layout_width="75dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/ic_microphone"
-        app:layout_constraintStart_toEndOf="@+id/btImagen"
-        app:layout_constraintTop_toBottomOf="@+id/txPrincipal" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.427" />
 
     <Button
         android:id="@+id/btGuardar"
-        android:layout_width="59dp"
-        android:layout_height="57dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
@@ -66,35 +44,21 @@
         app:layout_constraintTop_toBottomOf="@+id/txPrincipal"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageView
-        android:id="@+id/imImagen"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginStart="125dp"
-        android:layout_marginLeft="125dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="125dp"
-        android:layout_marginRight="125dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btAudio"
-        app:srcCompat="@drawable/ic_camera"
-        tools:ignore="VectorDrawableCompat" />
-
     <TextView
         android:id="@+id/txTareasPorClasificar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
+        android:layout_marginBottom="50dp"
         android:text="Tareas pendientes de clasificar: "
         android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imImagen" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/txTareasPorAtender"
@@ -102,12 +66,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
         android:text="Tareas pendientes de atender:"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txTareasPorClasificar" />
 

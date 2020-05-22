@@ -13,6 +13,7 @@ class InitDb: SQLiteOpenHelper(AppTFGLuismi.CONTEXT, AppTFGLuismi.DB_NAME, null,
             "${Contract.Tarea.IMAGEN} TEXT," +
             "${Contract.Tarea.AUDIO} TEXT," +
             "${Contract.Tarea.USUARIO_DELEGADO} TEXT," +
+            "${Contract.Tarea.IS_DELEGADA} INTEGER," +
             "${Contract.Tarea.PROYECTO} TEXT," +
             "${Contract.Tarea.TIPO_LISTA} TEXT);"
 

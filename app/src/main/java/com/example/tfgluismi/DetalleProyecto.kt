@@ -24,14 +24,18 @@ class DetalleProyecto: AppCompatActivity() {
     lateinit var idsTareas: ArrayList<Int>
     lateinit var fechasTareas: ArrayList<String>
     lateinit var horasTareas: ArrayList<String>
+    lateinit var imagenesTareas: ArrayList<String>
     lateinit var usuariosDelegadosTareas: ArrayList<String>
+    lateinit var isDelegadasTareas: ArrayList<Int>
     lateinit var tipoListasTareas: ArrayList<String>
     lateinit var proyectosTareas: ArrayList<String>
     lateinit var copiaTextosTareas: ArrayList<String>
     lateinit var copiaIdsTareas: ArrayList<Int>
     lateinit var copiaFechasTareas: ArrayList<String>
     lateinit var copiaHorasTareas: ArrayList<String>
+    lateinit var copiaImagenesTareas: ArrayList<String>
     lateinit var copiaUsuariosDelegadosTareas: ArrayList<String>
+    lateinit var copiaIsDelegadasTareas: ArrayList<Int>
     lateinit var copiaTipoListasTareas: ArrayList<String>
     lateinit var copiaProyectosTareas: ArrayList<String>
 
@@ -115,7 +119,9 @@ class DetalleProyecto: AppCompatActivity() {
         idsTareas = BdAdmin.getTareasId()!!
         fechasTareas = BdAdmin.getTareasFecha()!!
         horasTareas = BdAdmin.getTareasHora()!!
+        imagenesTareas = BdAdmin.getTareasImagen()!!
         usuariosDelegadosTareas = BdAdmin.getTareasUsuarioDelegado()!!
+        isDelegadasTareas = BdAdmin.getTareasIsDelegada()!!
         tipoListasTareas = BdAdmin.getTareasTipoLista()!!
         proyectosTareas = BdAdmin.getTareasProyecto()!!
         globalContext = this
@@ -126,7 +132,9 @@ class DetalleProyecto: AppCompatActivity() {
         copiaIdsTareas = idsTareas.clone() as ArrayList<Int>
         copiaFechasTareas = fechasTareas.clone() as ArrayList<String>
         copiaHorasTareas = horasTareas.clone() as ArrayList<String>
+        copiaImagenesTareas = imagenesTareas.clone() as ArrayList<String>
         copiaUsuariosDelegadosTareas = usuariosDelegadosTareas.clone() as ArrayList<String>
+        copiaIsDelegadasTareas = isDelegadasTareas.clone() as ArrayList<Int>
         copiaTipoListasTareas = tipoListasTareas.clone() as ArrayList<String>
         copiaProyectosTareas = proyectosTareas.clone() as ArrayList<String>
 
@@ -143,7 +151,9 @@ class DetalleProyecto: AppCompatActivity() {
                     copiaIdsTareas.removeAt(cont-aux)
                     copiaFechasTareas.removeAt(cont-aux)
                     copiaHorasTareas.removeAt(cont-aux)
+                    copiaImagenesTareas.removeAt(cont - aux)
                     copiaUsuariosDelegadosTareas.removeAt(cont-aux)
+                    copiaIsDelegadasTareas.removeAt(cont-aux)
                     copiaTipoListasTareas.removeAt(cont-aux)
                     copiaProyectosTareas.removeAt(cont-aux)
                 }
@@ -166,7 +176,9 @@ class DetalleProyecto: AppCompatActivity() {
             bundle.putString("itemTx",copiaTextosTareas!!.get(i))
             bundle.putString("itemF",copiaFechasTareas!!.get(i))
             bundle.putString("itemH",copiaHorasTareas!!.get(i))
+            bundle.putString("itemIm",copiaImagenesTareas!!.get(i))
             bundle.putString("itemUD",copiaUsuariosDelegadosTareas!!.get(i))
+            bundle.putInt("itemIsD",copiaIsDelegadasTareas!!.get(i))
             bundle.putString("itemTL",copiaTipoListasTareas!!.get(i))
             bundle.putString("itemP",copiaProyectosTareas!!.get(i))
             //Se añade el contenido del Bundle al intent

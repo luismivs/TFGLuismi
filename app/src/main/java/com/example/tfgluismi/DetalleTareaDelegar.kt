@@ -25,6 +25,7 @@ class DetalleTareaDelegar : AppCompatActivity(), View.OnClickListener {
     var Hora: String? = ""
     var Imagen: String? = ""
     var UsuarioDelegado: String? = ""
+    var IsDelegada: Int = 0
     var TipoLista: String? = ""
     var Proyecto: String? = ""
     var Seleccion: String? = ""
@@ -57,6 +58,7 @@ class DetalleTareaDelegar : AppCompatActivity(), View.OnClickListener {
         Imagen = bundle.getString("itemIm")
         Imagen = bundle.getString("itemIm")
         UsuarioDelegado = bundle.getString("itemUD")
+        IsDelegada = bundle.getInt("itemIsD")
         TipoLista = bundle.getString("itemTL")
         Proyecto = bundle.getString("itemP")
 
@@ -86,14 +88,22 @@ class DetalleTareaDelegar : AppCompatActivity(), View.OnClickListener {
         val plainTextUD: EditText = findViewById(R.id.txUsuarioDelegadoDel)
         plainTextUD.setText(UsuarioDelegado)
 
+        val confirmarDelegacion: RadioButton = findViewById(R.id.rbIsDelegado)
+        if(IsDelegada == 1){
+            confirmarDelegacion.isChecked = true
+        }
         val btDelegar: Button = findViewById(R.id.btDelegarDel)
         btDelegar.setOnClickListener {
+            if(IsDelegada == 0) {
+                confirmarDelegacion.isChecked = true
+                IsDelegada = 1
+            }
             val intent = Intent()
             intent.type = "text/plain"
             intent.putExtra(Intent.EXTRA_TEXT, "Tarea: " + Texto + "\r\nFecha y hora: " + Fecha + " | " + Hora)
             intent.putExtra(Intent.EXTRA_SUBJECT,"Tarea enviada desde Organ-Ice")
             intent.action = Intent.ACTION_SEND
-            //MARCAR EL ENVIO CON UN TIC
+
 
             val chooseIntent = Intent.createChooser(intent, "Elige una opcion")
             startActivity(chooseIntent)
@@ -177,6 +187,7 @@ class DetalleTareaDelegar : AppCompatActivity(), View.OnClickListener {
                     txHoraDel.text.toString(),
                     Imagen.toString(),
                     txUsuarioDelegadoDel.text.toString(),
+                    IsDelegada,
                     TipoLista.toString(),
                     Proyecto.toString()
                 )
@@ -190,6 +201,7 @@ class DetalleTareaDelegar : AppCompatActivity(), View.OnClickListener {
                     txHoraDel.text.toString(),
                     Imagen.toString(),
                     txUsuarioDelegadoDel.text.toString(),
+                    IsDelegada,
                     Seleccion.toString(),
                     Proyecto.toString()
                 )
@@ -203,6 +215,7 @@ class DetalleTareaDelegar : AppCompatActivity(), View.OnClickListener {
                     txHoraDel.text.toString(),
                     Imagen.toString(),
                     txUsuarioDelegadoDel.text.toString(),
+                    IsDelegada,
                     TipoLista.toString(),
                     SeleccionProy.toString()
                 )
@@ -216,6 +229,7 @@ class DetalleTareaDelegar : AppCompatActivity(), View.OnClickListener {
                     txHoraDel.text.toString(),
                     Imagen.toString(),
                     txUsuarioDelegadoDel.text.toString(),
+                    IsDelegada,
                     Seleccion.toString(),
                     SeleccionProy.toString()
                 )

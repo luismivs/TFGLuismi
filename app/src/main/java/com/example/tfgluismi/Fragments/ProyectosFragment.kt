@@ -44,7 +44,6 @@ class ProyectosFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         crearProyecto()
-        //eliminarProyecto()
     }
 
     //-------------------------------------------------------CREATES-----------------------------------------------------------------------------
@@ -76,27 +75,4 @@ class ProyectosFragment : Fragment() {
             startActivity(intent)
         }
     }
-
-    //----------------------------------------------------------DELETES-------------------------------------------------------------------
-/*
-    fun eliminarProyecto(){
-        ListProyectos.onItemLongClickListener = AdapterView.OnItemLongClickListener { adapterView, view, i, l ->
-
-            val texto = textos.get(i)
-            globalContext = this.getActivity()!!
-            val dialog = AlertDialog.Builder(globalContext)
-            dialog.setTitle("Confirmación")
-            dialog.setMessage("¿Quieres borrar el proyecto?")
-            dialog.setPositiveButton("Si"){dialogInterface, i ->
-                BdAdmin.removeProyecto(texto)
-                crearProyecto()
-            }
-            dialog.setNegativeButton("No"){dialogInterface, i ->
-                dialogInterface.dismiss()
-            }
-            dialog.show()
-            true
-        }
-    }
-*/
 }

@@ -5,7 +5,7 @@ import android.widget.Toast
 import android.widget.Toast.makeText
 import java.lang.Exception
 
-data class Tarea(var tareaid:Int, var texto:String, var fecha:String, var hora:String, var imagen:String, var usuarioDelegado:String, var tipoLista: String, var proyecto: String)
+data class Tarea(var tareaid:Int, var texto:String, var fecha:String, var hora:String, var imagen:String, var usuarioDelegado:String, var isDelegada: Int, var tipoLista: String, var proyecto: String)
 data class ArchCon(var id: Int, var texto:String)
 data class Proyecto(var id: Int, var texto:String, var descripcion: String)
 data class ArchProy(var id: Int, var texto:String, var proyecto: String)
@@ -133,6 +133,31 @@ class AdminBD {
             }
             db.close()
             return usuarios
+        }catch (ex:Exception){
+            makeText(AppTFGLuismi.CONTEXT,"No se pudieron mostrar las tareas", Toast.LENGTH_SHORT).show()
+            return null
+        }
+    }
+
+    fun getTareasIsDelegada():ArrayList<Int>?{
+        try {
+            val valores = arrayListOf<Int>()
+            val db = AppTFGLuismi.DB.readableDatabase
+            //Comprobamos si hay tareas guardadas
+            val numTareas = DatabaseUtils.queryNumEntries(db,AppTFGLuismi.TB_TAREAS).toInt()
+            if (numTareas > 0){
+                val qry = "SELECT ${Contract.Tarea.IS_DELEGADA} FROM ${AppTFGLuismi.TB_TAREAS}"
+                val c = db.rawQuery(qry,null)
+                //vamos al inicio de la tabla
+                c.moveToFirst()
+                do{
+                    valores.add(c.getInt(c.getColumnIndex(Contract.Tarea.IS_DELEGADA)))
+                }while (c.moveToNext())
+            }else{
+                makeText(AppTFGLuismi.CONTEXT,"No hay tareas guardadas", Toast.LENGTH_SHORT).show()
+            }
+            db.close()
+            return valores
         }catch (ex:Exception){
             makeText(AppTFGLuismi.CONTEXT,"No se pudieron mostrar las tareas", Toast.LENGTH_SHORT).show()
             return null
@@ -494,8 +519,8 @@ class AdminBD {
         try {
             val db = AppTFGLuismi.DB.writableDatabase
             var qry = "INSERT INTO ${AppTFGLuismi.TB_TAREAS} (" +
-                    "${Contract.Tarea.TEXTO}, ${Contract.Tarea.FECHA}, ${Contract.Tarea.HORA}, ${Contract.Tarea.IMAGEN}, ${Contract.Tarea.USUARIO_DELEGADO}, ${Contract.Tarea.TIPO_LISTA}, ${Contract.Tarea.PROYECTO})" +
-                    "VALUES('${tarea.texto}','${tarea.fecha}','${tarea.hora}','${tarea.imagen}','${tarea.usuarioDelegado}','${tarea.tipoLista}','${tarea.proyecto}');"
+                    "${Contract.Tarea.TEXTO}, ${Contract.Tarea.FECHA}, ${Contract.Tarea.HORA}, ${Contract.Tarea.IMAGEN}, ${Contract.Tarea.USUARIO_DELEGADO}, ${Contract.Tarea.IS_DELEGADA}, ${Contract.Tarea.TIPO_LISTA}, ${Contract.Tarea.PROYECTO})" +
+                    "VALUES('${tarea.texto}','${tarea.fecha}','${tarea.hora}','${tarea.imagen}','${tarea.usuarioDelegado}','${tarea.isDelegada}','${tarea.tipoLista}','${tarea.proyecto}');"
             db.execSQL(qry)
             db.close()
         }catch (ex:Exception){
@@ -599,6 +624,7 @@ class AdminBD {
                         "${Contract.Tarea.HORA} = '${tarea.hora}', " +
                         "${Contract.Tarea.IMAGEN} = '${tarea.imagen}', " +
                         "${Contract.Tarea.USUARIO_DELEGADO} = '${tarea.usuarioDelegado}', " +
+                        "${Contract.Tarea.IS_DELEGADA} = '${tarea.isDelegada}', " +
                         "${Contract.Tarea.TIPO_LISTA} = '${tarea.tipoLista}', " +
                         "${Contract.Tarea.PROYECTO} = '${tarea.proyecto}' " +
                       "WHERE ${Contract.Tarea.tareaID} = '${tarea.tareaid}';"

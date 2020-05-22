@@ -27,6 +27,7 @@ class SiguientesFragment : Fragment() {
     lateinit var horas: ArrayList<String>
     lateinit var imagenes: ArrayList<String>
     lateinit var usuariosDelegados: ArrayList<String>
+    lateinit var isDelegadas: ArrayList<Int>
     lateinit var tipoListas: ArrayList<String>
     lateinit var proyectos: ArrayList<String>
     lateinit var copiaTextos: ArrayList<String>
@@ -35,6 +36,7 @@ class SiguientesFragment : Fragment() {
     lateinit var copiaHoras: ArrayList<String>
     lateinit var copiaImagenes: ArrayList<String>
     lateinit var copiaUsuariosDelegados: ArrayList<String>
+    lateinit var copiaIsDelegadas: ArrayList<Int>
     lateinit var copiaTipoListas: ArrayList<String>
     lateinit var copiaProyectos: ArrayList<String>
 
@@ -64,6 +66,7 @@ class SiguientesFragment : Fragment() {
         horas = BdAdmin.getTareasHora()!!
         imagenes = BdAdmin.getTareasImagen()!!
         usuariosDelegados = BdAdmin.getTareasUsuarioDelegado()!!
+        isDelegadas = BdAdmin.getTareasIsDelegada()!!
         tipoListas = BdAdmin.getTareasTipoLista()!!
         proyectos = BdAdmin.getTareasProyecto()!!
         globalContext = this.getActivity()!!
@@ -76,6 +79,7 @@ class SiguientesFragment : Fragment() {
         copiaHoras = horas.clone() as ArrayList<String>
         copiaImagenes = imagenes.clone() as ArrayList<String>
         copiaUsuariosDelegados = usuariosDelegados.clone() as ArrayList<String>
+        copiaIsDelegadas = isDelegadas.clone() as ArrayList<Int>
         copiaTipoListas = tipoListas.clone() as ArrayList<String>
         copiaProyectos = proyectos.clone() as ArrayList<String>
 
@@ -94,6 +98,7 @@ class SiguientesFragment : Fragment() {
                     copiaHoras.removeAt(cont-aux)
                     copiaImagenes.removeAt(cont-aux)
                     copiaUsuariosDelegados.removeAt(cont-aux)
+                    copiaIsDelegadas.removeAt(cont-aux)
                     copiaTipoListas.removeAt(cont-aux)
                     copiaProyectos.removeAt(cont-aux)
                 }
@@ -118,6 +123,7 @@ class SiguientesFragment : Fragment() {
             bundle.putString("itemH",copiaHoras!!.get(i))
             bundle.putString("itemIm",copiaImagenes!!.get(i))
             bundle.putString("itemUD",copiaUsuariosDelegados!!.get(i))
+            bundle.putInt("itemID",copiaIsDelegadas!!.get(i))
             bundle.putString("itemTL",copiaTipoListas!!.get(i))
             bundle.putString("itemP",copiaProyectos!!.get(i))
             //Se añade el contenido del Bundle al intent

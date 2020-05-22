@@ -28,12 +28,6 @@ class MainFragment : Fragment() {
 
     val BdAdmin = AdminBD()
     lateinit var tareasTipoLista: ArrayList<String>
-    /*
-    lateinit var imagen: ImageView
-    val CARPETA_RAIZ: String = "imagenesOrganIce/"
-    val RUTA_IMAGEN: String = CARPETA_RAIZ+"misFotos"
-    var path: String = ""
-    */
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,44 +59,13 @@ class MainFragment : Fragment() {
         //Tratamos la funcionalidad del boton de guardar la tarea
         val button: Button = view.findViewById(R.id.btGuardar)
         button.setOnClickListener(View.OnClickListener {
-            val tarea = Tarea(0, txPrincipal.text.toString(), "", "", "", "", "","")
+            val tarea = Tarea(0, txPrincipal.text.toString(), "", "", "", "", 0,"","")
             if (tarea.texto != "") {
                 BdAdmin.addTarea(tarea)
                 txPrincipal.setText("")
                 Toast.makeText(AppTFGLuismi.CONTEXT, "Tarea guardada", Toast.LENGTH_SHORT).show()
             }else Toast.makeText(AppTFGLuismi.CONTEXT, "Introduce una tarea", Toast.LENGTH_SHORT).show()
         })
-
-        /*
-        //Tratamos la funcionalidad del boton tomar foto
-        val buttonFoto: Button = view.findViewById(R.id.btImagen)
-        buttonFoto.setOnClickListener(View.OnClickListener {
-
-            var fileImage = context?.getExternalFilesDir(RUTA_IMAGEN)
-            var isCreada: Boolean = fileImage!!.exists()
-            var nombreImagen: String = ""
-            var bitmap: Bitmap
-
-            if (isCreada == false){
-                isCreada = fileImage.mkdirs()
-            }
-            if (isCreada == true){
-                nombreImagen = (System.currentTimeMillis()/1000).toString() + ".jpg"
-            }
-
-            path = context?.getExternalFilesDir(RUTA_IMAGEN).toString() + File.separator + nombreImagen
-
-            var img = File(path)
-
-            var intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            intent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(img))
-            startActivity(intent)
-
-            bitmap = BitmapFactory.decodeFile(path)
-            imagen.setImageBitmap(bitmap)
-
-        })
-         */
 
         return view
     }

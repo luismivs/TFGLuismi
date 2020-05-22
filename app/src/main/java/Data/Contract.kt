@@ -15,6 +15,7 @@ class Contract {
             var FECHA = "fecha"
             var HORA = "hora"
             var USUARIO_DELEGADO = "usuarioDelegado"
+            var IS_DELEGADA = "isDelegada"
             var PROYECTO = "proyecto"
             var TIPO_LISTA = "tipoLista"
         }

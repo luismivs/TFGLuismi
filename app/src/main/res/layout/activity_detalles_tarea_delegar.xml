@@ -62,8 +62,8 @@
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="120dp"
-        android:layout_marginRight="120dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginRight="150dp"
         android:ems="10"
         android:hint="Usuario Delegado"
         android:inputType="textPersonName"
@@ -193,16 +193,13 @@
 
     <Button
         android:id="@+id/btDelegarDel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginLeft="30dp"
+        android:layout_width="57dp"
+        android:layout_height="43dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
         android:background="@drawable/ic_delegado"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txUsuarioDelegadoDel"
         app:layout_constraintTop_toBottomOf="@+id/txHoraDel" />
 
     <Button
@@ -226,5 +223,17 @@
         android:background="@drawable/ic_add_imagen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioButton
+        android:id="@+id/rbIsDelegado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:checked="false"
+        android:clickable="false"
+        app:layout_constraintEnd_toStartOf="@+id/btDelegarDel"
+        app:layout_constraintTop_toBottomOf="@+id/txHoraDel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

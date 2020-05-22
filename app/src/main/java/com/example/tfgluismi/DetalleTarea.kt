@@ -3,18 +3,24 @@ package com.example.tfgluismi
 import Data.AdminBD
 import Data.AppTFGLuismi
 import Data.Tarea
+import android.Manifest
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.media.MediaPlayer
+import android.media.MediaRecorder
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.view.View
 import android.widget.*
-import androidx.core.view.get
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_detalles_tarea.*
 import java.util.*
-import kotlin.collections.ArrayList
+
 
 class DetalleTarea : AppCompatActivity(), View.OnClickListener {
 
@@ -26,6 +32,7 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
     var Hora: String? = ""
     var Imagen: String? = ""
     var UsuarioDelegado: String? = ""
+    var IsDelegada: Int = 0
     var TipoLista: String? = ""
     var Proyecto: String? = ""
     var Seleccion: String? = ""
@@ -39,6 +46,9 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
     var minutos: Int = 0
     val COD_GALERIA: Int = 10
     lateinit var path: Uri
+    var grabacion = MediaRecorder()
+    var audio: String? = null
+    lateinit var bt_recorder: Button
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +67,7 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
         Hora = bundle.getString("itemH")
         Imagen = bundle.getString("itemIm")
         UsuarioDelegado = bundle.getString("itemUD")
+        IsDelegada = bundle.getInt("itemIsD")
         TipoLista = bundle.getString("itemTL")
         Proyecto = bundle.getString("itemP")
 
@@ -152,6 +163,60 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
         if (Proyecto != "Seleccione") {
             textViewP.setText("Proyecto: " + Proyecto)
         } else textViewP.setText("Proyecto: ")
+
+        //Tratamiento de audio y permisos
+        bt_recorder = findViewById(R.id.btRec)
+
+        if (ContextCompat.checkSelfPermission(
+                applicationContext,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                applicationContext,
+                Manifest.permission.RECORD_AUDIO
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this@DetalleTarea,
+                arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.RECORD_AUDIO
+                ),
+                1000
+            )
+        }
+    }
+
+    //Metodo para grabar el audio
+    fun Recorder(view: View){
+        //if(grabacion == null){
+            audio = Environment.getExternalStorageDirectory().absolutePath + "/Grabacion.mp3"
+            grabacion = MediaRecorder()
+            grabacion.setAudioSource(MediaRecorder.AudioSource.MIC)
+            grabacion.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+            //grabacion.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+            grabacion.setAudioEncoder(MediaRecorder.OutputFormat.AMR_NB)
+            grabacion.setOutputFile(audio)
+            grabacion.prepare()
+            grabacion.start()
+            Toast.makeText(AppTFGLuismi.CONTEXT,"Grabando...", Toast.LENGTH_SHORT).show()
+
+        //}else
+    if(grabacion != null){
+            grabacion.stop()
+            grabacion.release()
+            //grabacion = null
+            Toast.makeText(AppTFGLuismi.CONTEXT,"Grabacion finalizada", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    //Metodo para reproducirlo
+    fun Reproducir(view: View){
+        var mediaPlayer = MediaPlayer()
+        mediaPlayer.setDataSource(audio)
+        mediaPlayer.prepare()
+        mediaPlayer.start()
+        Toast.makeText(AppTFGLuismi.CONTEXT,"Reproduciendo audio", Toast.LENGTH_SHORT).show()
+
     }
 
     fun guardarTarea_click() {
@@ -164,6 +229,7 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
                     txHora.text.toString(),
                     Imagen.toString(),
                     txUsuarioDelegado.text.toString(),
+                    IsDelegada,
                     TipoLista.toString(),
                     Proyecto.toString()
                 )
@@ -177,6 +243,7 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
                     txHora.text.toString(),
                     Imagen.toString(),
                     txUsuarioDelegado.text.toString(),
+                    IsDelegada,
                     Seleccion.toString(),
                     Proyecto.toString()
                 )
@@ -190,6 +257,7 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
                     txHora.text.toString(),
                     Imagen.toString(),
                     txUsuarioDelegado.text.toString(),
+                    IsDelegada,
                     TipoLista.toString(),
                     SeleccionProy.toString()
                 )
@@ -203,6 +271,7 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
                     txHora.text.toString(),
                     Imagen.toString(),
                     txUsuarioDelegado.text.toString(),
+                    IsDelegada,
                     Seleccion.toString(),
                     SeleccionProy.toString()
                 )
