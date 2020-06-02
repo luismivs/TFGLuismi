@@ -65,4 +65,15 @@
             </item>
         </menu>
     </item>
+
+    <item android:title="Informacion">
+        <menu>
+            <item
+                android:id="@+id/acercaDeMenuDrawer"
+                android:icon="@drawable/ic_info"
+                android:title="Arcerca de">
+
+            </item>
+        </menu>
+    </item>
 </menu>

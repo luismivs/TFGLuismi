@@ -63,8 +63,8 @@ class DetalleTareaDelegar : AppCompatActivity(), View.OnClickListener {
         Proyecto = bundle.getString("itemP")
 
         //Modificamos el TextView del layout activity_detalles_tarea para que muestre los datos que hemos recibido por Bundle
-        val textView: TextView = findViewById(R.id.textViewIdTareasDel)
-        textView.setText("ID: " + ID)
+        //val textView: TextView = findViewById(R.id.textViewIdTareasDel)
+        //textView.setText("ID: " + ID)
         //Modificamos los cuadros de texto para que conserven el valor que ya tenían
         val plainTextTexto: EditText = findViewById(R.id.txTextoDel)
         plainTextTexto.setText(Texto)

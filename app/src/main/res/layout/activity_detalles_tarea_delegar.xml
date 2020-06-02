@@ -103,7 +103,7 @@
         app:layout_constraintStart_toEndOf="@+id/txtTipoListaDel"
         app:layout_constraintTop_toBottomOf="@+id/txTextoDel" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/textViewIdTareasDel"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -118,7 +118,7 @@
         app:layout_constraintBottom_toTopOf="@+id/txTextoDel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
         android:id="@+id/txtTipoListaDel"

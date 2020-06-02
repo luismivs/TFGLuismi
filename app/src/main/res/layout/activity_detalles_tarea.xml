@@ -55,7 +55,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txFecha" />
 
-    <EditText
+    <!--<EditText
         android:id="@+id/txUsuarioDelegado"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txHora" />
+        app:layout_constraintTop_toBottomOf="@+id/txHora" />-->
 
     <Button
         android:id="@+id/btActualizarTarea"
@@ -103,7 +103,7 @@
         app:layout_constraintStart_toEndOf="@+id/txtTipoLista"
         app:layout_constraintTop_toBottomOf="@+id/txTexto" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/textViewIdTareas"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -118,7 +118,7 @@
         app:layout_constraintBottom_toTopOf="@+id/txTexto"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
         android:id="@+id/txtTipoLista"
@@ -130,6 +130,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Tipo de Lista: "
+        android:textSize="18dp"
         app:layout_constraintEnd_toStartOf="@+id/SpinnerLista"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txTexto" />
@@ -175,7 +176,7 @@
         android:textSize="18dp"
         app:layout_constraintEnd_toStartOf="@+id/spinnerProyecto"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txUsuarioDelegado" />
+        app:layout_constraintTop_toBottomOf="@+id/txHora" />
 
     <Spinner
         android:id="@+id/spinnerProyecto"
@@ -189,7 +190,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.963"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txUsuarioDelegado" />
+        app:layout_constraintTop_toBottomOf="@+id/txHora" />
 
     <Button
         android:id="@+id/btMultimedia"
@@ -213,7 +214,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <!--<Button
         android:id="@+id/btRec"
         android:layout_width="51dp"
         android:layout_height="44dp"
@@ -223,9 +224,9 @@
         android:background="@drawable/ic_rec"
         android:onClick="Recorder"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <Button
+    <!--<Button
         android:id="@+id/btPlay"
         android:layout_width="58dp"
         android:layout_height="44dp"
@@ -235,6 +236,6 @@
         android:background="@drawable/ic_play"
         android:onClick="Reproducir"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

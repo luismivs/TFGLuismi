@@ -72,8 +72,9 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
         Proyecto = bundle.getString("itemP")
 
         //Modificamos el TextView del layout activity_detalles_tarea para que muestre los datos que hemos recibido por Bundle
-        val textView: TextView = findViewById(R.id.textViewIdTareas)
-        textView.setText("ID: " + ID)
+        //val textView: TextView = findViewById(R.id.textViewIdTareas)
+        //textView.setText("ID: " + ID)
+
         //Modificamos los cuadros de texto para que conserven el valor que ya tenían
         val plainTextTexto: EditText = findViewById(R.id.txTexto)
         plainTextTexto.setText(Texto)
@@ -94,8 +95,8 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
         plainTextHora.setText(Hora)
 
 
-        val plainTextUD: EditText = findViewById(R.id.txUsuarioDelegado)
-        plainTextUD.setText(UsuarioDelegado)
+        //val plainTextUD: EditText = findViewById(R.id.txUsuarioDelegado)
+        //plainTextUD.setText(UsuarioDelegado)
 
         //Tratamiento del spinner para insertar el tipo de lista
         val spinnerTL: Spinner = findViewById(R.id.SpinnerLista)
@@ -164,8 +165,9 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
             textViewP.setText("Proyecto: " + Proyecto)
         } else textViewP.setText("Proyecto: ")
 
+
         //Tratamiento de audio y permisos
-        bt_recorder = findViewById(R.id.btRec)
+        /*bt_recorder = findViewById(R.id.btRec)
 
         if (ContextCompat.checkSelfPermission(
                 applicationContext,
@@ -183,11 +185,11 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
                 ),
                 1000
             )
-        }
+        }*/
     }
 
     //Metodo para grabar el audio
-    fun Recorder(view: View){
+    /*fun Recorder(view: View){
         //if(grabacion == null){
             audio = Environment.getExternalStorageDirectory().absolutePath + "/Grabacion.mp3"
             grabacion = MediaRecorder()
@@ -207,17 +209,17 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
             //grabacion = null
             Toast.makeText(AppTFGLuismi.CONTEXT,"Grabacion finalizada", Toast.LENGTH_SHORT).show()
         }
-    }
+    }*/
 
     //Metodo para reproducirlo
-    fun Reproducir(view: View){
+    /*fun Reproducir(view: View){
         var mediaPlayer = MediaPlayer()
         mediaPlayer.setDataSource(audio)
         mediaPlayer.prepare()
         mediaPlayer.start()
         Toast.makeText(AppTFGLuismi.CONTEXT,"Reproduciendo audio", Toast.LENGTH_SHORT).show()
 
-    }
+    }*/
 
     fun guardarTarea_click() {
         btActualizarTarea.setOnClickListener() {
@@ -228,7 +230,7 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
                     txFecha.text.toString(),
                     txHora.text.toString(),
                     Imagen.toString(),
-                    txUsuarioDelegado.text.toString(),
+                    UsuarioDelegado.toString(),
                     IsDelegada,
                     TipoLista.toString(),
                     Proyecto.toString()
@@ -242,7 +244,7 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
                     txFecha.text.toString(),
                     txHora.text.toString(),
                     Imagen.toString(),
-                    txUsuarioDelegado.text.toString(),
+                    UsuarioDelegado.toString(),
                     IsDelegada,
                     Seleccion.toString(),
                     Proyecto.toString()
@@ -256,7 +258,7 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
                     txFecha.text.toString(),
                     txHora.text.toString(),
                     Imagen.toString(),
-                    txUsuarioDelegado.text.toString(),
+                    UsuarioDelegado.toString(),
                     IsDelegada,
                     TipoLista.toString(),
                     SeleccionProy.toString()
@@ -270,7 +272,7 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
                     txFecha.text.toString(),
                     txHora.text.toString(),
                     Imagen.toString(),
-                    txUsuarioDelegado.text.toString(),
+                    UsuarioDelegado.toString(),
                     IsDelegada,
                     Seleccion.toString(),
                     SeleccionProy.toString()

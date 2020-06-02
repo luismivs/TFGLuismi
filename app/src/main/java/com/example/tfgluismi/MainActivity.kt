@@ -111,6 +111,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 fragmentTransaction.commit()
                 toolbar.setTitle("OrganIce - Notas de consulta")
             }
+            R.id.acercaDeMenuDrawer -> {
+                fragmentTransaction = fragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.container, AcercaDeFragment())
+                fragmentTransaction.commit()
+                toolbar.setTitle("OrganIce - Acerca de")
+            }
         }
         return false
     }
