@@ -26,6 +26,7 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
 
     val BdAdmin = AdminBD()
     var bundle = Bundle()
+    var titulo: String = "Resumen de tarea"
     var ID: Int = 0
     var Texto: String? = ""
     var Fecha: String? = ""
@@ -54,6 +55,7 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalles_tarea)
+        this.setTitle(titulo)
         guardarTarea_click()
         irAMultimedia_click()
         añadirImagen_click()

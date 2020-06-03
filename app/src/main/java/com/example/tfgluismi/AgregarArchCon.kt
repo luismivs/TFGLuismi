@@ -9,10 +9,12 @@ import kotlinx.android.synthetic.main.activity_agregar_arch_con.*
 class AgregarArchCon : AppCompatActivity() {
 
     val BdAdmin = AdminBD()
+    var titulo: String = "Agregar nota"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_arch_con)
+        this.setTitle(titulo)
         guardarArchCon_click()
     }
 

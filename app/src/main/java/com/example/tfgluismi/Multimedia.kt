@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 class Multimedia : AppCompatActivity() {
 
     val BdAdmin = AdminBD()
+    var titulo: String = "Multimedia"
     var bundle = Bundle()
     lateinit var imagenIV: ImageView
     lateinit var path: Uri
@@ -20,7 +21,7 @@ class Multimedia : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_multimedia)
-
+        this.setTitle(titulo)
         imagenIV = findViewById(R.id.ivImage)
 
         //Almacenamos los datos que hemos enviado mediante un Bundle atraves del intent del fragment ClasificarTareasFragment

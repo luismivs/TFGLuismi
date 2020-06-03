@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_mostrar_arch_proy.*
 class MostrarArchProy : AppCompatActivity() {
 
     val BdAdmin = AdminBD()
+    var titulo: String = "Notas de proyecto"
     var bundle = Bundle()
     lateinit var globalContext: Context
     lateinit var textos: ArrayList<String>
@@ -30,6 +31,7 @@ class MostrarArchProy : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mostrar_arch_proy)
+        this.setTitle(titulo)
         eliminarArchProy()
         add_Arch_Proy_click()
 

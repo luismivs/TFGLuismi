@@ -9,10 +9,12 @@ import kotlinx.android.synthetic.main.activity_agregar_proyectos.*
 class AgregarProyecto : AppCompatActivity() {
 
     val BdAdmin = AdminBD()
+    var titulo: String = "Agregar proyecto"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_proyectos)
+        this.setTitle(titulo)
             guardarProyecto_click()
     }
 

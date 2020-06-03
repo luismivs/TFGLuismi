@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_actualizar_arch_proy.*
 class ActualizarArchProy: AppCompatActivity() {
 
     val BdAdmin = AdminBD()
+    var titulo: String = "Actualizar nota"
     var bundle = Bundle()
     var ID: Int = 0
     var texto: String? = ""
@@ -21,6 +22,7 @@ class ActualizarArchProy: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_actualizar_arch_proy)
+        this.setTitle(titulo)
         actualizarArchProy_click()
 
         //Almacenamos los datos que hemos enviado mediante un Bundle atraves del intent del fragment MotrarArchConFragment

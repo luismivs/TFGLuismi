@@ -29,6 +29,7 @@ import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+    var titulo: String = "OrganIce - Principal"
     lateinit var drawerLayout: DrawerLayout
     lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     lateinit var toolbar: Toolbar
@@ -41,11 +42,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        this.setTitle(titulo)
         toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         drawerLayout = findViewById(R.id.drawer)
         navigationView = findViewById(R.id.navigationView)
-        //establecer el evento onClick al navigationView
+        //Establecer el evento onClick al navigationView
         navigationView.setNavigationItemSelectedListener(this)
 
         actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, toolbar,R.string.open,R.string.close)
@@ -67,7 +69,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 fragmentTransaction = fragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.container, MainFragment())
                 fragmentTransaction.commit()
-                toolbar.setTitle("OrganIce - Principal")
+                toolbar.setTitle("OrganIce - Inicio")
             }
             R.id.clasificarTareasMenuDrawer -> {
                 fragmentTransaction = fragmentManager.beginTransaction()

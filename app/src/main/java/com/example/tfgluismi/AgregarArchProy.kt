@@ -12,12 +12,14 @@ import kotlinx.android.synthetic.main.activity_agregar_arch_proy.*
 class AgregarArchProy : AppCompatActivity() {
 
     val BdAdmin = AdminBD()
+    var titulo: String = "Agregar nota"
     var bundle = Bundle()
     var textoProy: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_arch_proy)
+        this.setTitle(titulo)
         guardarArchProy_click()
 
         //Almacenamos los datos que hemos enviado mediante un Bundle atraves del intent del fragment ProyectosFragment

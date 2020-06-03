@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_mostrar_tareas.*
 class DetalleProyecto: AppCompatActivity() {
 
     val BdAdmin = AdminBD()
+    var titulo: String = "Resumen de proyecto"
     var bundle = Bundle()
     var ID: Int = 0
     var texto: String? = ""
@@ -42,6 +43,7 @@ class DetalleProyecto: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalle_proyecto)
+        this.setTitle(titulo)
         actualizarProyecto_click()
         consultarArchProy_click()
         eliminarProyecto()

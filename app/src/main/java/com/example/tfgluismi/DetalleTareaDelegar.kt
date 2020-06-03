@@ -18,6 +18,7 @@ import kotlin.collections.ArrayList
 class DetalleTareaDelegar : AppCompatActivity(), View.OnClickListener {
 
     val BdAdmin = AdminBD()
+    var titulo: String = "Resumen de tarea"
     var bundle = Bundle()
     var ID: Int = 0
     var Texto: String? = ""
@@ -44,6 +45,7 @@ class DetalleTareaDelegar : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalles_tarea_delegar)
+        this.setTitle(titulo)
         guardarTarea_click()
         irAMultimedia_click()
         añadirImagen_click()
