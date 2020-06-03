@@ -81,9 +81,12 @@ class DetalleTarea : AppCompatActivity(), View.OnClickListener {
         val plainTextTexto: EditText = findViewById(R.id.txTexto)
         plainTextTexto.setText(Texto)
         val textViewTL: TextView = findViewById(R.id.txtTipoLista)
-        if (TipoLista != "Seleccione") {
-            textViewTL.setText("Tipo de lista: " + TipoLista)
-        } else textViewTL.setText("Tipo de lista: ")
+        if (TipoLista != "Seleccione" && TipoLista != "") {
+            textViewTL.setText(TipoLista)
+        }
+        if (TipoLista.equals("Seleccione") || TipoLista.equals("")){
+            textViewTL.setText("Lista: -")
+        }
 
         //Tratamiento de los campos fecha y hora
         plainTextFecha = findViewById(R.id.txFecha)

@@ -29,8 +29,8 @@ class ActualizarArchCon: AppCompatActivity() {
         ID=bundle.getInt("itemId")
         descripcion=bundle.getString("itemTx")
         //Modificamos el TextView del layout activity_actualizar_arch_con para que muestre los datos que hemos recibido por Bundle
-        val textView: TextView = findViewById(R.id.textViewIdArchCon)
-        textView.setText("ID: " + ID + "\r\nActual: " + descripcion)
+        //val textView: TextView = findViewById(R.id.textViewIdArchCon)
+        //textView.setText("ID: " + ID + "\r\nActual: " + descripcion)
         //Modificamos el cuadro de texto para que conserve el valor que ya tenía
         val plainText: EditText = findViewById(R.id.txActualizarArchCon)
         plainText.setText(descripcion)
