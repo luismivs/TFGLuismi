@@ -10,12 +10,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.example.tfgluismi.DetalleTarea
 import com.example.tfgluismi.R
+import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_mostrar_tareas.*
 
 class ClasificarTareasFragment : Fragment() {

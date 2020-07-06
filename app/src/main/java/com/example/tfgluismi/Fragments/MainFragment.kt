@@ -108,8 +108,8 @@ class MainFragment : Fragment() {
 
         //Tratamos la funcionalidad de mostrar informacion del tipo de lista al tocar su imagen
 
-       /** val imCalendario: ImageView = view.findViewById(R.id.imageCalendario)
-        imCalendario.setOnClickListener({
+        /*val imCalendarioIr: ImageView = view.findViewById(R.id.imageCalendario)
+        imCalendarioIr.setOnClickListener({
             val transactionCalendario = fragmentManager?.beginTransaction()
             transactionCalendario?.replace(R.id.container, CalendarioFragment())
             transactionCalendario?.commit()
